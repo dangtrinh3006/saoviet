@@ -45,3 +45,4 @@ next-env.d.ts
 public/vendor/
 test-results/
 playwright-report/
+.seed-credentials.*.local

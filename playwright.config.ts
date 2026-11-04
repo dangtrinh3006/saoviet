@@ -14,6 +14,6 @@ export default defineConfig({
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
-  // Reuses `npm run dev` if it is already up; otherwise starts it (needs DB: docker compose up -d).
-  webServer: { command: "npm run dev", url: `${baseURL}/vi`, reuseExistingServer: true, timeout: 180_000 },
+  // Local: reuses `npm run dev` if up (needs DB: docker compose up -d). CI: serves the production build.
+  webServer: { command: process.env.CI ? "npx next start -p 3100" : "npm run dev", url: `${baseURL}/vi`, reuseExistingServer: true, timeout: 180_000 },
 });

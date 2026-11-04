@@ -6,7 +6,13 @@ import { admin } from "better-auth/plugins";
 import { headers } from "next/headers";
 import { db, schema } from "@/db";
 
+// On Vercel the production domain comes from the platform; BETTER_AUTH_URL overrides it.
+const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+const baseURL = process.env.BETTER_AUTH_URL ?? (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3100");
+
 export const auth = betterAuth({
+  baseURL,
+  trustedOrigins: [baseURL, ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : [])],
   database: drizzleAdapter(db, { provider: "pg", schema }),
   emailAndPassword: { enabled: true, minPasswordLength: 8, autoSignIn: true },
   session: { cookieCache: { enabled: true, maxAge: 5 * 60 } },

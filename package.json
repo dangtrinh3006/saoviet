@@ -15,7 +15,9 @@
     "media:fetch": "node scripts/fetch-media.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "test:all": "npm run lint && tsc --noEmit && vitest run && playwright test"
+    "test:all": "npm run lint && tsc --noEmit && vitest run && playwright test",
+    "check": "npm run lint && tsc --noEmit && vitest run",
+    "deploy": "npm run check && vercel deploy --prod"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.3.0",

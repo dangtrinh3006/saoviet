@@ -1,0 +1,8 @@
+.env*
+!.env.example
+.seed-credentials.local
+.dev.log
+test-results/
+playwright-report/
+.next/
+node_modules/

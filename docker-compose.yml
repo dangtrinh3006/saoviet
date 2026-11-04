@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: saoviet-db
+    environment:
+      POSTGRES_USER: saoviet
+      POSTGRES_PASSWORD: saoviet-local-dev # gitleaks:allow local-only throwaway credential
+      POSTGRES_DB: saoviet
+    ports:
+      - "5434:5432"
+    volumes:
+      - saoviet-pg:/var/lib/postgresql/data
+volumes:
+  saoviet-pg:

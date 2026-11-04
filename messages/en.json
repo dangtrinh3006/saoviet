@@ -1,0 +1,222 @@
+{
+  "nav": {
+    "home": "Home",
+    "tours": "Journeys",
+    "map": "Dark-sky map",
+    "blog": "Journal",
+    "forum": "Forum",
+    "services": "Services",
+    "account": "Account",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "admin": "Admin",
+    "book": "Book"
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light",
+    "red": "Red light",
+    "label": "Theme"
+  },
+  "lang": {
+    "label": "Language"
+  },
+  "home": {
+    "heroEyebrow": "Astro travel in Vietnam",
+    "heroTitle": "In search of skies that are still dark",
+    "heroSubtitle": "Small-group journeys to mountains, forests and islands where the Milky Way is still plain to the naked eye, with an astronomy guide and observing equipment.",
+    "ctaTours": "View journeys",
+    "ctaMap": "Open the dark-sky map",
+    "tonightTitle": "Tonight's sky",
+    "tonightSubtitle": "Lunar phase, cloud cover and air quality at each observing site.",
+    "featuredTitle": "Featured journeys",
+    "featuredSubtitle": "Chosen for sky darkness, observing season and what lies along the way.",
+    "statsLocations": "dark-sky sites",
+    "statsDarkest": "highest estimated SQM",
+    "statsTours": "journeys",
+    "journalTitle": "Observing journal",
+    "servicesTitle": "Services",
+    "manifestoTitle": "Why we look for darkness",
+    "manifestoBody": "Most of us live under a sky that has lost its Milky Way. Sao Viet takes people to places where the dark is still intact, lights responsibly at every stop, and states plainly what is measured and what is estimated."
+  },
+  "map": {
+    "title": "Dark-sky map",
+    "subtitle": "Observing sites across Vietnam, ranked by estimated sky darkness.",
+    "sqm": "SQM",
+    "bortle": "Bortle scale",
+    "aqi": "Air quality",
+    "clouds": "Clouds",
+    "moon": "Moon",
+    "elevation": "Elevation",
+    "bestMonths": "Best months",
+    "estimateNote": "SQM and Bortle values are estimates, not on-site measurements.",
+    "loading": "Loading sky data",
+    "unavailable": "No data yet",
+    "openPanorama": "View panorama",
+    "viewTours": "Journeys here",
+    "legend": "Legend",
+    "filters": "Filters"
+  },
+  "tours": {
+    "title": "Journeys",
+    "subtitle": "Small groups, dates set by the Moon, and an astronomy guide on every trip.",
+    "nights": "{count, plural, one {# night} other {# nights}}",
+    "from": "From",
+    "perGuest": "/ guest",
+    "difficulty": {
+      "easy": "Easy",
+      "moderate": "Moderate",
+      "hard": "Demanding"
+    },
+    "highlights": "Highlights",
+    "itinerary": "Itinerary",
+    "includes": "Included",
+    "book": "Book",
+    "reviews": "Reviews",
+    "writeReview": "Write a review",
+    "rating": "Rating",
+    "noReviews": "No reviews yet."
+  },
+  "booking": {
+    "title": "Booking",
+    "date": "Departure date",
+    "guests": "Guests",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "note": "Notes",
+    "total": "Total",
+    "submit": "Send booking request",
+    "success": "Request received. We will be in touch to confirm within 24 hours.",
+    "code": "Booking code",
+    "moonWarning": "This date is close to full moon, so the sky will be brighter and the Milky Way hard to see. Consider a date nearer new moon.",
+    "signInToTrack": "Sign in to track your booking."
+  },
+  "blog": {
+    "title": "Journal",
+    "subtitle": "Observing guides, astronomy explained, and notes from the field.",
+    "readMore": "Read more",
+    "minutes": "{count} min read",
+    "comments": "Comments",
+    "writeComment": "Write a comment",
+    "post": "Post"
+  },
+  "forum": {
+    "title": "Forum",
+    "subtitle": "A place to talk about gear, trips and photographs of the sky.",
+    "newThread": "New thread",
+    "category": "Category",
+    "categories": {
+      "general": "General",
+      "gear": "Gear",
+      "trips": "Trips",
+      "photos": "Photos"
+    },
+    "replies": "{count, plural, one {# reply} other {# replies}}",
+    "threadTitle": "Title",
+    "threadBody": "Message",
+    "submit": "Post",
+    "empty": "No threads in this category yet."
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "name": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "noAccount": "No account yet?",
+    "haveAccount": "Already have an account?",
+    "error": "Incorrect email or password."
+  },
+  "account": {
+    "title": "Account",
+    "orders": "My bookings",
+    "empty": "You have no bookings yet.",
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "admin": {
+    "title": "Admin",
+    "orders": "Bookings",
+    "users": "Users",
+    "moderation": "Moderation",
+    "revenue": "Revenue",
+    "hide": "Hide",
+    "show": "Show",
+    "role": "Role",
+    "ban": "Suspend account"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading",
+    "error": "Something went wrong. Please try again.",
+    "back": "Back",
+    "vnd": "VND",
+    "close": "Close"
+  },
+  "footer": {
+    "tagline": "Sao Viet — Astro Travel Vietnam. In search of skies that are still dark.",
+    "rights": "All rights reserved.",
+    "dataCredits": "Weather and air-quality data from open sources. Sky darkness values are estimates.",
+    "legalTitle": "Company information",
+    "demoNotice": "This is a simulated website built as a technical showcase. The company, registration numbers and licences below are mock data and not valid for real transactions.",
+    "company": "Sao Viet Astro Travel Co., Ltd. (simulated)",
+    "taxId": "Enterprise / tax code",
+    "taxIssuer": "first issued by the Hanoi Department of Finance on 04/11/2026",
+    "travelLicense": "International travel business licence",
+    "travelIssuer": "issued by the Vietnam National Authority of Tourism",
+    "address": "Head office",
+    "hotline": "Hotline",
+    "responsible": "Person responsible for content",
+    "builtBy": "Design & development",
+    "moit": "Simulated \"Notified to the Ministry of Industry and Trade\" badge (online.gov.vn)",
+    "privacy": "Personal data protection policy (Decree 13/2023/ND-CP)",
+    "terms": "Booking & cancellation terms"
+  },
+  "pages": {
+    "all": "All",
+    "categories": "Categories",
+    "empty": "Nothing here yet.",
+    "postCategory": {
+      "guide": "Guide",
+      "story": "Story",
+      "science": "Science",
+      "gear": "Gear"
+    },
+    "keepReading": "Keep reading",
+    "noComments": "No comments yet. Be the first.",
+    "signInToComment": "Sign in to join the conversation.",
+    "signInCta": "Sign in",
+    "commentPlaceholder": "Share an experience or a question…",
+    "commentError": "Could not post. Your text is kept — please try again.",
+    "send": "Post",
+    "pinned": "Pinned",
+    "threadError": "Could not create the thread. Check the title (≥ 6 chars) and body (≥ 10 chars).",
+    "dbUnavailable": "Database unavailable. Please try again later.",
+    "servicesTitle": "Services",
+    "servicesSubtitle": "From a rental telescope for the weekend to a private star night for a whole company — every service is run by guides who know Vietnam's skies.",
+    "fromPrice": "From",
+    "servicesCtaEyebrow": "Plan it",
+    "servicesCtaTitle": "Pick a sky. We handle the rest.",
+    "authQuote": "Your eyes need about twenty minutes in the dark to see the Milky Way.",
+    "authSubtitle": "Keep your bookings, write reviews and join the stargazers' forum.",
+    "passwordHint": "At least 8 characters.",
+    "working": "Working…",
+    "cancelOrder": "Cancel booking",
+    "confirmCancel": "Confirm cancel",
+    "upcoming": "Upcoming",
+    "contact": "Contact",
+    "departure": "Departure",
+    "total": "Total",
+    "kind": {
+      "review": "Review",
+      "comment": "Comment",
+      "thread": "Thread"
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "tours": "Hành trình",
+    "map": "Bản đồ trời tối",
+    "blog": "Nhật ký",
+    "forum": "Diễn đàn",
+    "services": "Dịch vụ",
+    "account": "Tài khoản",
+    "signIn": "Đăng nhập",
+    "signOut": "Đăng xuất",
+    "admin": "Quản trị",
+    "book": "Đặt chỗ"
+  },
+  "theme": {
+    "dark": "Tối",
+    "light": "Sáng",
+    "red": "Đèn đỏ",
+    "label": "Giao diện"
+  },
+  "lang": {
+    "label": "Ngôn ngữ"
+  },
+  "home": {
+    "heroEyebrow": "Du lịch thiên văn Việt Nam",
+    "heroTitle": "Đi tìm những bầu trời còn tối",
+    "heroSubtitle": "Hành trình nhóm nhỏ đến các vùng núi, rừng và đảo nơi dải Ngân Hà vẫn hiện rõ bằng mắt thường, cùng hướng dẫn viên thiên văn và thiết bị quan sát.",
+    "ctaTours": "Xem hành trình",
+    "ctaMap": "Mở bản đồ trời tối",
+    "tonightTitle": "Bầu trời đêm nay",
+    "tonightSubtitle": "Pha trăng, độ phủ mây và chất lượng không khí tại các điểm quan sát.",
+    "featuredTitle": "Hành trình tiêu biểu",
+    "featuredSubtitle": "Được chọn theo độ tối của bầu trời, mùa quan sát và trải nghiệm trên đường đi.",
+    "statsLocations": "điểm trời tối",
+    "statsDarkest": "SQM ước tính cao nhất",
+    "statsTours": "hành trình",
+    "journalTitle": "Nhật ký quan sát",
+    "servicesTitle": "Dịch vụ",
+    "manifestoTitle": "Vì sao chúng tôi đi tìm bóng tối",
+    "manifestoBody": "Phần lớn chúng ta sống dưới một bầu trời đã mất đi dải Ngân Hà. Sao Việt đưa người đi đến những nơi bóng tối còn nguyên vẹn, chiếu sáng có trách nhiệm tại mỗi điểm dừng, và ghi rõ đâu là số đo, đâu là ước tính."
+  },
+  "map": {
+    "title": "Bản đồ trời tối",
+    "subtitle": "Các điểm quan sát trên khắp Việt Nam, xếp theo độ tối ước tính của bầu trời.",
+    "sqm": "SQM",
+    "bortle": "Thang Bortle",
+    "aqi": "Chất lượng không khí",
+    "clouds": "Mây",
+    "moon": "Mặt Trăng",
+    "elevation": "Độ cao",
+    "bestMonths": "Tháng nên đi",
+    "estimateNote": "SQM và Bortle là giá trị ước tính, chưa phải số đo tại chỗ.",
+    "loading": "Đang tải dữ liệu bầu trời",
+    "unavailable": "Chưa có dữ liệu",
+    "openPanorama": "Xem ảnh toàn cảnh",
+    "viewTours": "Hành trình tại đây",
+    "legend": "Chú giải",
+    "filters": "Bộ lọc"
+  },
+  "tours": {
+    "title": "Hành trình",
+    "subtitle": "Nhóm nhỏ, lịch theo pha trăng, mỗi chuyến có hướng dẫn viên thiên văn đi cùng.",
+    "nights": "{count} đêm",
+    "from": "Từ",
+    "perGuest": "/ khách",
+    "difficulty": {
+      "easy": "Nhẹ nhàng",
+      "moderate": "Vừa sức",
+      "hard": "Thử thách"
+    },
+    "highlights": "Điểm nhấn",
+    "itinerary": "Lịch trình",
+    "includes": "Bao gồm",
+    "book": "Đặt chỗ",
+    "reviews": "Đánh giá",
+    "writeReview": "Viết đánh giá",
+    "rating": "Điểm",
+    "noReviews": "Chưa có đánh giá nào."
+  },
+  "booking": {
+    "title": "Đặt chỗ",
+    "date": "Ngày khởi hành",
+    "guests": "Số khách",
+    "name": "Họ và tên",
+    "email": "Email",
+    "phone": "Số điện thoại",
+    "note": "Ghi chú",
+    "total": "Tổng cộng",
+    "submit": "Gửi yêu cầu đặt chỗ",
+    "success": "Đã nhận yêu cầu. Chúng tôi sẽ liên hệ để xác nhận trong vòng 24 giờ.",
+    "code": "Mã đặt chỗ",
+    "moonWarning": "Ngày này gần trăng tròn, bầu trời sẽ sáng hơn và khó thấy Ngân Hà. Cân nhắc chọn ngày gần trăng mới.",
+    "signInToTrack": "Đăng nhập để theo dõi trạng thái đặt chỗ."
+  },
+  "blog": {
+    "title": "Nhật ký",
+    "subtitle": "Hướng dẫn quan sát, kiến thức thiên văn và ghi chép từ các chuyến đi.",
+    "readMore": "Đọc tiếp",
+    "minutes": "{count} phút đọc",
+    "comments": "Bình luận",
+    "writeComment": "Viết bình luận",
+    "post": "Gửi"
+  },
+  "forum": {
+    "title": "Diễn đàn",
+    "subtitle": "Nơi trao đổi về thiết bị, chuyến đi và những bức ảnh bầu trời.",
+    "newThread": "Chủ đề mới",
+    "category": "Chuyên mục",
+    "categories": {
+      "general": "Chung",
+      "gear": "Thiết bị",
+      "trips": "Chuyến đi",
+      "photos": "Ảnh"
+    },
+    "replies": "{count} trả lời",
+    "threadTitle": "Tiêu đề",
+    "threadBody": "Nội dung",
+    "submit": "Đăng",
+    "empty": "Chưa có chủ đề nào trong chuyên mục này."
+  },
+  "auth": {
+    "signIn": "Đăng nhập",
+    "signUp": "Tạo tài khoản",
+    "name": "Họ và tên",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "noAccount": "Chưa có tài khoản?",
+    "haveAccount": "Đã có tài khoản?",
+    "error": "Email hoặc mật khẩu không đúng."
+  },
+  "account": {
+    "title": "Tài khoản",
+    "orders": "Chuyến đã đặt",
+    "empty": "Bạn chưa đặt chuyến nào.",
+    "status": {
+      "pending": "Chờ xác nhận",
+      "confirmed": "Đã xác nhận",
+      "completed": "Đã hoàn thành",
+      "cancelled": "Đã hủy"
+    }
+  },
+  "admin": {
+    "title": "Quản trị",
+    "orders": "Đơn đặt chỗ",
+    "users": "Người dùng",
+    "moderation": "Kiểm duyệt",
+    "revenue": "Doanh thu",
+    "hide": "Ẩn",
+    "show": "Hiện",
+    "role": "Vai trò",
+    "ban": "Khóa tài khoản"
+  },
+  "common": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "loading": "Đang tải",
+    "error": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+    "back": "Quay lại",
+    "vnd": "đ",
+    "close": "Đóng"
+  },
+  "footer": {
+    "tagline": "Du lịch thiên văn Việt Nam. Đi tìm những bầu trời còn tối.",
+    "rights": "Bảo lưu mọi quyền.",
+    "dataCredits": "Dữ liệu thời tiết và chất lượng không khí từ các nguồn mở. Độ tối bầu trời là giá trị ước tính.",
+    "legalTitle": "Thông tin doanh nghiệp",
+    "demoNotice": "Website mô phỏng phục vụ trình diễn kỹ thuật. Doanh nghiệp, mã số và giấy phép dưới đây là dữ liệu giả lập, không dùng để giao dịch thật.",
+    "company": "Công ty TNHH Du lịch Thiên văn Sao Việt (mô phỏng)",
+    "taxId": "Mã số doanh nghiệp / MST",
+    "taxIssuer": "do Sở Tài chính TP. Hà Nội cấp lần đầu ngày 04/11/2026",
+    "travelLicense": "Giấy phép kinh doanh lữ hành quốc tế",
+    "travelIssuer": "do Cục Du lịch Quốc gia Việt Nam cấp",
+    "address": "Trụ sở",
+    "hotline": "Hotline",
+    "responsible": "Người chịu trách nhiệm nội dung",
+    "builtBy": "Thiết kế & phát triển",
+    "moit": "Mô phỏng nhãn \"Đã thông báo Bộ Công Thương\" (online.gov.vn)",
+    "privacy": "Chính sách bảo vệ dữ liệu cá nhân (NĐ 13/2023/NĐ-CP)",
+    "terms": "Điều khoản đặt tour & hoàn huỷ"
+  },
+  "pages": {
+    "all": "Tất cả",
+    "categories": "Chuyên mục",
+    "empty": "Chưa có gì ở đây.",
+    "postCategory": {
+      "guide": "Cẩm nang",
+      "story": "Ký sự",
+      "science": "Khoa học",
+      "gear": "Thiết bị"
+    },
+    "keepReading": "Đọc tiếp",
+    "noComments": "Chưa có bình luận nào. Hãy là người đầu tiên.",
+    "signInToComment": "Đăng nhập để tham gia thảo luận.",
+    "signInCta": "Đăng nhập",
+    "commentPlaceholder": "Chia sẻ trải nghiệm hoặc câu hỏi của bạn…",
+    "commentError": "Chưa gửi được. Nội dung vẫn được giữ, hãy thử lại.",
+    "send": "Gửi",
+    "pinned": "Ghim",
+    "threadError": "Chưa tạo được chủ đề. Kiểm tra tiêu đề (≥ 6 ký tự) và nội dung (≥ 10 ký tự).",
+    "dbUnavailable": "Không kết nối được cơ sở dữ liệu. Vui lòng thử lại sau.",
+    "servicesTitle": "Dịch vụ",
+    "servicesSubtitle": "Từ một chiếc kính thuê cho đêm cuối tuần đến một đêm sao riêng cho cả công ty — mọi dịch vụ đều do người dẫn đường hiểu bầu trời Việt Nam thực hiện.",
+    "fromPrice": "Từ",
+    "servicesCtaEyebrow": "Lên kế hoạch",
+    "servicesCtaTitle": "Chọn một bầu trời, chúng tôi lo phần còn lại.",
+    "authQuote": "Mắt cần khoảng 20 phút trong bóng tối để thấy được Ngân Hà.",
+    "authSubtitle": "Lưu đơn đặt tour, viết đánh giá và tham gia diễn đàn những người ngắm sao.",
+    "passwordHint": "Tối thiểu 8 ký tự.",
+    "working": "Đang xử lý…",
+    "cancelOrder": "Huỷ đơn",
+    "confirmCancel": "Xác nhận huỷ",
+    "upcoming": "Sắp tới",
+    "contact": "Liên hệ",
+    "departure": "Khởi hành",
+    "total": "Tổng",
+    "kind": {
+      "review": "Đánh giá",
+      "comment": "Bình luận",
+      "thread": "Chủ đề"
+    }
+  }
+}

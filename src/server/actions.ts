@@ -6,6 +6,9 @@ import type { z } from "zod";
 import { tourBySlug } from "@/content/tours";
 import { db, schema } from "@/db";
 import { getSession, requireAdmin, requireUser } from "@/lib/auth";
+import { formatVnd } from "@/lib/l10n";
+import { bookingConfirmationMail } from "@/lib/mail-templates";
+import { sendMail } from "@/lib/mailer";
 import { commentInput, orderInput, reviewInput, threadInput } from "./schemas";
 
 export type ActionResult<T = undefined> = { ok: true; data?: T } | { ok: false; error: string };
@@ -48,6 +51,24 @@ export async function createOrder(input: z.input<typeof orderInput>): Promise<Ac
     contactPhone: v.contactPhone,
     note: v.note || null,
   });
+  // The order is already stored; a mail outage must never turn it into a failure.
+  try {
+    const total = tour.priceVnd * v.guests;
+    await sendMail({
+      to: v.contactEmail,
+      kind: "booking-confirmation",
+      ...bookingConfirmationMail({
+        name: v.contactName,
+        code,
+        tourTitle: { vi: tour.title.vi, en: tour.title.en },
+        departureDate: v.departureDate,
+        guests: v.guests,
+        total: { vi: formatVnd(total, "vi"), en: formatVnd(total, "en") },
+      }),
+    });
+  } catch (e) {
+    console.error("booking confirmation mail failed", code, e instanceof Error ? e.message : e);
+  }
   revalidatePath("/[locale]/account", "page");
   revalidatePath("/[locale]/admin", "page");
   return { ok: true, data: { code } };

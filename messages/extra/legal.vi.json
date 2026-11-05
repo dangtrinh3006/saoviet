@@ -1,0 +1,77 @@
+{
+  "legal": {
+    "effective": "Có hiệu lực từ",
+    "version": "Phiên bản",
+    "toc": "Mục lục",
+    "tocToggle": "Xem mục lục",
+    "backToTop": "Lên đầu trang",
+    "contactLink": "qua trang Liên hệ",
+    "questions": "Còn điều gì chưa rõ?",
+    "questionsBody": "Chúng tôi trả lời mọi câu hỏi về dữ liệu cá nhân, đặt tour và hoàn huỷ — thường trong một ngày làm việc.",
+    "goContact": "Liên hệ với chúng tôi",
+    "privacy": {
+      "eyebrow": "PHÁP LÝ · DỮ LIỆU CÁ NHÂN",
+      "title": "Chính sách bảo vệ dữ liệu cá nhân",
+      "intro": "Chúng tôi thu thập ít dữ liệu nhất có thể, chỉ dùng để vận hành tour và cộng đồng, và không bao giờ bán dữ liệu của bạn.",
+      "metaDescription": "Cách Sao Việt thu thập, sử dụng, lưu trữ và bảo vệ dữ liệu cá nhân theo Nghị định 13/2023/NĐ-CP.",
+      "seeAlso": "Điều khoản đặt tour & hoàn huỷ"
+    },
+    "terms": {
+      "eyebrow": "PHÁP LÝ · ĐẶT TOUR",
+      "title": "Điều khoản đặt tour & hoàn huỷ",
+      "intro": "Quy trình đặt chỗ, giá, chính sách hoàn huỷ, cách xử lý khi trời nhiều mây và quy tắc an toàn cho mọi chuyến ngắm sao.",
+      "nonProfit": "Sao Việt là dự án cộng đồng phi lợi nhuận: giá tour chỉ nhằm bù chi phí tổ chức và hỗ trợ hoạt động phổ biến thiên văn, không nhằm mục đích kinh doanh sinh lời.",
+      "metaDescription": "Quy trình đặt tour, giá, đặt cọc, mức hoàn huỷ, chính sách mây che và đêm trăng tròn, an toàn vùng núi cao và quy tắc cộng đồng của Sao Việt.",
+      "seeAlso": "Chính sách bảo vệ dữ liệu cá nhân"
+    },
+    "contact": {
+      "eyebrow": "LIÊN HỆ",
+      "title": "Liên hệ",
+      "subtitle": "Hỏi về tour, đề xuất hợp tác, yêu cầu về dữ liệu cá nhân hay chỉ muốn kể về một đêm trời đẹp — hãy viết cho chúng tôi.",
+      "metaDescription": "Gửi câu hỏi về tour ngắm sao, hợp tác hoặc yêu cầu về dữ liệu cá nhân tới Sao Việt.",
+      "formTitle": "Gửi tin nhắn",
+      "name": "Họ và tên",
+      "email": "Email",
+      "topic": "Chủ đề",
+      "topicPlaceholder": "Chọn chủ đề",
+      "message": "Nội dung",
+      "messageHint": "Từ 10 đến 3.000 ký tự.",
+      "submit": "Gửi tin nhắn",
+      "sending": "Đang gửi…",
+      "consent": "Khi gửi, bạn đồng ý để Sao Việt dùng thông tin này để trả lời bạn, theo",
+      "consentLink": "Chính sách bảo vệ dữ liệu cá nhân",
+      "topics": {
+        "booking": "Đặt tour, thanh toán, hoàn huỷ",
+        "tour": "Lịch trình, điểm ngắm sao",
+        "partnership": "Hợp tác, trường học, cộng đồng",
+        "privacy": "Dữ liệu cá nhân",
+        "community": "Diễn đàn, đánh giá, kiểm duyệt",
+        "other": "Khác"
+      },
+      "errors": {
+        "name": "Vui lòng nhập họ tên (2–80 ký tự).",
+        "email": "Email chưa đúng định dạng.",
+        "topic": "Vui lòng chọn chủ đề.",
+        "messageShort": "Nội dung cần ít nhất 10 ký tự.",
+        "messageLong": "Nội dung tối đa 3.000 ký tự.",
+        "summary": "Vui lòng kiểm tra lại các trường được đánh dấu.",
+        "server": "Chưa gửi được tin nhắn. Nội dung của bạn vẫn được giữ nguyên — vui lòng thử lại."
+      },
+      "successTitle": "Đã nhận tin nhắn của bạn",
+      "successBody": "Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi qua email trong vòng một ngày làm việc.",
+      "sendAnother": "Gửi tin nhắn khác",
+      "infoTitle": "Thông tin liên hệ",
+      "hoursLabel": "Giờ làm việc",
+      "hours": "Thứ 2 – Thứ 7, 8:30 – 17:30",
+      "hoursNote": "Giờ Việt Nam (GMT+7). Trong đêm tour, trưởng đoàn liên lạc trực tiếp với khách.",
+      "responseLabel": "Thời gian phản hồi",
+      "response": "Trong vòng 1 ngày làm việc",
+      "responseNote": "Yêu cầu về dữ liệu cá nhân: trong vòng 72 giờ.",
+      "ownerLabel": "Người phụ trách",
+      "owner": "Nguyễn Đăng Trình",
+      "legalLabel": "Văn bản pháp lý",
+      "faqEyebrow": "CÂU HỎI THƯỜNG GẶP",
+      "faqTitle": "Trước khi lên đường"
+    }
+  }
+}

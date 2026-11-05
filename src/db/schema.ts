@@ -171,3 +171,22 @@ export const commentRelations = relations(comment, ({ one }) => ({
 export const threadRelations = relations(thread, ({ one }) => ({
   user: one(user, { fields: [thread.userId], references: [user.id] }),
 }));
+
+export const mailStatus = pgEnum("mail_status", ["queued", "sent", "failed"]);
+
+// Every outgoing mail is kept here, delivered or not, so admins can read or forward it.
+export const mailOutbox = pgTable(
+  "mail_outbox",
+  {
+    id: text("id").primaryKey(),
+    to: text("to").notNull(),
+    subject: text("subject").notNull(),
+    html: text("html").notNull(),
+    text: text("text").notNull(),
+    kind: text("kind").notNull(),
+    status: mailStatus("status").notNull().default("queued"),
+    error: text("error"),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (t) => [index("mail_outbox_created_idx").on(t.createdAt), index("mail_outbox_to_idx").on(t.to)],
+);

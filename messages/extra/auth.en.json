@@ -1,0 +1,74 @@
+{
+  "authx": {
+    "forgot": {
+      "link": "Forgot password?",
+      "title": "Forgot password",
+      "subtitle": "Enter your account email. If it exists, we will send a password reset link, valid for 1 hour.",
+      "submit": "Send reset link",
+      "sent": "If this email has a Sao Việt account, a password reset link has been sent. Check your inbox (and spam folder).",
+      "back": "Back to sign in"
+    },
+    "reset": {
+      "title": "Set a new password",
+      "subtitle": "Choose a new password of at least 8 characters. All existing sessions will be signed out.",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "submit": "Save new password",
+      "mismatch": "The two passwords do not match.",
+      "tooShort": "The password needs at least 8 characters.",
+      "invalidToken": "This password reset link is invalid or has expired.",
+      "requestNew": "Request a new link",
+      "error": "Could not reset the password. Please try again.",
+      "success": "Password changed. You can now sign in with your new password.",
+      "goSignIn": "Sign in"
+    },
+    "admin": {
+      "resetPassword": "Reset password",
+      "sendResetEmail": "Send reset email",
+      "setTempPassword": "Set temporary password",
+      "resetEmailSent": "Password reset email sent (see Outbox).",
+      "tempPasswordLabel": "Temporary password",
+      "tempPasswordNote": "Shown only once. Hand it to the user over a secure channel and ask them to change it right away.",
+      "revokeSessions": "Revoke sessions",
+      "sessionsRevoked": "All of this user's sessions were revoked.",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "error": "Action failed."
+    },
+    "outbox": {
+      "tab": "Outbox",
+      "empty": "No mail yet.",
+      "to": "To",
+      "subject": "Subject",
+      "kind": "Kind",
+      "status": "Status",
+      "time": "Time",
+      "details": "View content",
+      "error": "Delivery error",
+      "kinds": { "reset-password": "Password reset", "booking-confirmation": "Booking confirmation" },
+      "statuses": { "queued": "Queued", "sent": "Sent", "failed": "Failed" }
+    },
+    "mail": {
+      "brand": "Sao Việt",
+      "reset": {
+        "subject": "Reset your password",
+        "greeting": "Hi {name},",
+        "body": "We received a request to reset the password of your Sao Việt account. Use the button below to choose a new one. The link is valid for 1 hour.",
+        "button": "Reset password",
+        "fallback": "If the button does not work, open this link:",
+        "ignore": "If you did not ask for this, ignore this email. Your current password stays unchanged."
+      },
+      "booking": {
+        "subject": "Booking confirmation {code}",
+        "greeting": "Hi {name},",
+        "body": "Thank you for booking with Sao Việt. Your booking is pending confirmation; we will contact you shortly.",
+        "code": "Booking code",
+        "tour": "Tour",
+        "date": "Departure date",
+        "guests": "Guests",
+        "total": "Total",
+        "footer": "Keep this code to look the booking up under Account."
+      }
+    }
+  }
+}

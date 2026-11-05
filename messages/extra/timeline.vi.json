@@ -1,0 +1,9 @@
+{
+  "timeline": {
+    "label": "Bản đồ lộ trình 3D với {count} chặng",
+    "stop": "Chặng {n}",
+    "progress": "Chặng {current} / {total}",
+    "loading": "Đang dựng địa hình…",
+    "hint": "Cuộn để đi theo lộ trình"
+  }
+}

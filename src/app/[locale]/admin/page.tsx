@@ -3,14 +3,16 @@ import { notFound } from "next/navigation";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { StatusChip } from "@/components/account/status-chip";
 import { HideToggle, OrderStatusSelect } from "@/components/admin/admin-controls";
+import { UserActions } from "@/components/admin/user-actions";
 import { tourBySlug } from "@/content/tours";
 import { Link } from "@/i18n/navigation";
 import { getFreshSession } from "@/lib/auth";
 import { cn } from "@/lib/cn";
 import { formatVnd, pick } from "@/lib/l10n";
+import { listOutbox } from "@/server/admin-actions";
 import { adminOverview } from "@/server/queries";
 
-const TABS = ["orders", "moderation", "users"] as const;
+const TABS = ["orders", "moderation", "users", "outbox"] as const;
 type Tab = (typeof TABS)[number];
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -27,8 +29,10 @@ export default async function AdminPage({ params, searchParams }: PageProps<"/[l
   const t = await getTranslations("admin");
   const ta = await getTranslations("account");
   const tp = await getTranslations("pages");
+  const tx = await getTranslations("authx.outbox");
   const format = await getFormatter();
   const data = await adminOverview();
+  const outbox = tab === "outbox" ? await listOutbox() : [];
   const pendingCount = data.orders.filter((o) => o.status === "pending").length;
 
   const kpis = [
@@ -69,7 +73,7 @@ export default async function AdminPage({ params, searchParams }: PageProps<"/[l
               tab === k ? "border-accent text-ink" : "border-transparent text-ink-muted hover:text-ink",
             )}
           >
-            {t(k)}
+            {k === "outbox" ? tx("tab") : t(k)}
           </Link>
         ))}
       </nav>
@@ -189,9 +193,47 @@ export default async function AdminPage({ params, searchParams }: PageProps<"/[l
                   {u.banned ? ` · ${t("ban")}` : ""}
                 </span>
                 <span className="readout col-start-2 text-xs text-ink-faint sm:col-start-auto">{format.dateTime(u.createdAt, { dateStyle: "medium" })}</span>
+                <UserActions userId={u.id} userEmail={u.email} />
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {tab === "outbox" && (
+        <section className="mt-8">
+          {outbox.length === 0 ? (
+            <p className="text-ink-faint">{tx("empty")}</p>
+          ) : (
+            <ul className="divide-y divide-line border-y hairline">
+              {outbox.map((m) => (
+                <li key={m.id} className="py-4">
+                  <div className="grid gap-x-6 gap-y-1 sm:grid-cols-[minmax(0,1fr)_auto]">
+                    <div className="min-w-0">
+                      <p className="truncate font-medium">{m.subject}</p>
+                      <p className="truncate text-xs text-ink-faint">
+                        {tx("to")}: {m.to}
+                      </p>
+                    </div>
+                    <p className="readout flex flex-wrap gap-x-3 text-xs text-ink-muted sm:justify-end">
+                      <span>{tx.has(`kinds.${m.kind}`) ? tx(`kinds.${m.kind}`) : m.kind}</span>
+                      <span className={cn(m.status === "failed" ? "text-danger" : m.status === "sent" ? "text-accent" : "text-ink-muted")}>{tx(`statuses.${m.status}`)}</span>
+                      <time dateTime={m.createdAt.toISOString()}>{format.dateTime(m.createdAt, { dateStyle: "short", timeStyle: "medium" })}</time>
+                    </p>
+                  </div>
+                  <details className="mt-3">
+                    <summary className="cursor-pointer text-sm text-accent">{tx("details")}</summary>
+                    {m.error && (
+                      <p className="mt-2 break-words text-xs text-danger">
+                        {tx("error")}: {m.error}
+                      </p>
+                    )}
+                    <pre className="card mt-3 max-h-96 select-all overflow-auto whitespace-pre-wrap break-words p-4 text-xs leading-relaxed">{m.text}</pre>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       )}
     </div>

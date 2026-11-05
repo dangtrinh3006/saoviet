@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BookingWidget } from "@/components/tours/booking-widget";
+import { Itinerary3D } from "@/components/tours/itinerary-3d";
 import { ReviewForm } from "@/components/tours/review-form";
 import { Reveal } from "@/components/ui/reveal";
 import { SkyPlate } from "@/components/ui/sky-plate";
@@ -93,19 +94,10 @@ export default async function TourPage({ params }: PageProps<"/[locale]/tours/[s
 
           <section>
             <h2 className="eyebrow mb-6">{t("itinerary")}</h2>
-            <ol className="relative space-y-10 border-l hairline pl-8">
-              {tour.itinerary.map((step, i) => (
-                <Reveal key={i} delay={i * 0.05}>
-                  <li className="relative">
-                    <span className="absolute -left-[2.35rem] top-1 grid size-4 place-items-center rounded-full bg-bg ring-1 ring-accent">
-                      <span className="size-1.5 rounded-full bg-accent" />
-                    </span>
-                    <h3 className="display text-2xl">{pick(step.title, locale)}</h3>
-                    <p className="mt-2 leading-relaxed text-ink-muted">{pick(step.body, locale)}</p>
-                  </li>
-                </Reveal>
-              ))}
-            </ol>
+            <Itinerary3D
+              seedKey={tour.slug}
+              steps={tour.itinerary.map((step) => ({ title: pick(step.title, locale), body: pick(step.body, locale) }))}
+            />
           </section>
 
           <section>

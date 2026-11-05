@@ -14,6 +14,7 @@ function safeNext(next: string | null) {
 
 export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
   const t = useTranslations("auth");
+  const tx = useTranslations("authx.forgot");
   const tp = useTranslations("pages");
   const router = useRouter();
   const params = useSearchParams();
@@ -64,6 +65,13 @@ export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
         />
         {mode === "sign-up" && <span className="block text-xs text-ink-faint">{tp("passwordHint")}</span>}
       </label>
+      {mode === "sign-in" && (
+        <p className="-mt-2 text-right text-sm">
+          <Link href="/forgot-password" className="text-ink-muted underline-offset-4 hover:text-accent hover:underline">
+            {tx("link")}
+          </Link>
+        </p>
+      )}
       {error && (
         <p role="alert" className="rounded-xl bg-danger/10 px-4 py-3 text-sm text-danger">
           {error}

@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { SkyPlate } from "@/components/ui/sky-plate";
 
-export async function AuthShell({ title, children }: { title: string; children: ReactNode }) {
+export async function AuthShell({ title, subtitle, children }: { title: string; subtitle?: string; children: ReactNode }) {
   const t = await getTranslations("pages");
   return (
     <div className="mx-auto grid min-h-[100svh] max-w-7xl gap-10 px-5 pb-16 pt-24 md:px-8 lg:grid-cols-2 lg:items-center lg:gap-16 lg:pt-20">
@@ -17,7 +17,7 @@ export async function AuthShell({ title, children }: { title: string; children: 
       <div className="mx-auto w-full max-w-md">
         <p className="readout text-xs text-ink-faint">SAO VIỆT · ACCOUNT</p>
         <h1 className="display mt-4 text-5xl md:text-6xl">{title}</h1>
-        <p className="mt-4 text-ink-muted">{t("authSubtitle")}</p>
+        <p className="mt-4 text-ink-muted">{subtitle ?? t("authSubtitle")}</p>
         <div className="mt-10">{children}</div>
       </div>
     </div>

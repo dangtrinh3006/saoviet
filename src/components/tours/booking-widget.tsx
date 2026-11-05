@@ -10,6 +10,7 @@ import { cn } from "@/lib/cn";
 import { formatVnd } from "@/lib/l10n";
 import { moonInfo } from "@/lib/sky";
 import { createOrder } from "@/server/actions";
+import { useMounted } from "@/lib/use-client";
 
 const iso = (d: Date) => d.toLocaleDateString("sv-SE", { timeZone: "Asia/Ho_Chi_Minh" });
 
@@ -33,6 +34,8 @@ export function BookingWidget({ tour }: { tour: Tour }) {
   const tc = useTranslations("common");
   const locale = useLocale();
   const { data: session } = useSession();
+  // The calendar depends on the viewer's "today" and moon maths, so it renders client-side only.
+  const mounted = useMounted();
   const nights = useNights();
   const [date, setDate] = useState<string | null>(null);
   const [guests, setGuests] = useState(2);
@@ -87,7 +90,8 @@ export function BookingWidget({ tour }: { tour: Tour }) {
       <fieldset>
         <legend className="eyebrow mb-3">{t("date")}</legend>
         <div className="grid grid-cols-7 gap-1">
-          {nights.map((n) => {
+          {!mounted && Array.from({ length: 42 }, (_, i) => <span key={i} className="aspect-square animate-pulse rounded-lg bg-bg-elev" />)}
+          {mounted && nights.map((n) => {
             const bright = n.illumination > 0.6;
             return (
               <button

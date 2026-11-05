@@ -15,6 +15,7 @@ import {
   Eye as PhEye,
   EyeSlash,
   GraduationCap as PhGraduationCap,
+  Jeep as PhJeep,
   List,
   MagnifyingGlass,
   Moon as PhMoon,
@@ -59,6 +60,7 @@ export const Cloud = wrap(PhCloud);
 export const Eye = wrap(PhEye);
 export const EyeOff = wrap(EyeSlash);
 export const GraduationCap = wrap(PhGraduationCap, "duotone");
+export const Jeep = wrap(PhJeep, "duotone");
 export const Layers = wrap(Stack);
 export const Loader2 = wrap(SpinnerGap, "bold");
 export const LogOut = wrap(SignOut);

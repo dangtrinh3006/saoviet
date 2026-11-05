@@ -1,0 +1,9 @@
+{
+  "timeline": {
+    "label": "3D route map with {count} stops",
+    "stop": "Stop {n}",
+    "progress": "Stop {current} of {total}",
+    "loading": "Rendering terrain…",
+    "hint": "Scroll to follow the route"
+  }
+}

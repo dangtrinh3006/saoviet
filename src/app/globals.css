@@ -162,6 +162,7 @@ body::after {
   }
   .btn {
     display: inline-flex;
+    white-space: nowrap;
     align-items: center;
     gap: 0.6rem;
     border-radius: 999px;

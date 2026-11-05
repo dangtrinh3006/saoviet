@@ -1,0 +1,77 @@
+{
+  "legal": {
+    "effective": "Effective",
+    "version": "Version",
+    "toc": "Contents",
+    "tocToggle": "Show contents",
+    "backToTop": "Back to top",
+    "contactLink": "via our Contact page",
+    "questions": "Anything unclear?",
+    "questionsBody": "We answer every question about personal data, bookings and cancellations — usually within one working day.",
+    "goContact": "Contact us",
+    "privacy": {
+      "eyebrow": "LEGAL · PERSONAL DATA",
+      "title": "Privacy Policy",
+      "intro": "We collect as little data as possible, use it only to run tours and the community, and never sell it.",
+      "metaDescription": "How Sao Việt collects, uses, stores and protects personal data under Decree 13/2023/ND-CP.",
+      "seeAlso": "Booking & Cancellation Terms"
+    },
+    "terms": {
+      "eyebrow": "LEGAL · BOOKINGS",
+      "title": "Booking & Cancellation Terms",
+      "intro": "How booking works, prices, cancellations, what happens when it's cloudy, and the safety rules for every stargazing trip.",
+      "nonProfit": "Sao Việt is a non-profit community project: tour prices only cover running costs and support astronomy outreach, not commercial profit.",
+      "metaDescription": "Sao Việt's booking flow, prices, deposits, cancellation tiers, cloud-cover and full-moon policy, high-altitude safety and community rules.",
+      "seeAlso": "Privacy Policy"
+    },
+    "contact": {
+      "eyebrow": "CONTACT",
+      "title": "Contact",
+      "subtitle": "Questions about a tour, partnership ideas, personal data requests, or just a story about a perfect night sky — write to us.",
+      "metaDescription": "Send Sao Việt your questions about stargazing tours, partnerships or personal data requests.",
+      "formTitle": "Send a message",
+      "name": "Full name",
+      "email": "Email",
+      "topic": "Topic",
+      "topicPlaceholder": "Choose a topic",
+      "message": "Message",
+      "messageHint": "10 to 3,000 characters.",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "consent": "By sending, you agree that Sao Việt may use this information to reply to you, as described in our",
+      "consentLink": "Privacy Policy",
+      "topics": {
+        "booking": "Bookings, payment, cancellations",
+        "tour": "Itineraries and stargazing sites",
+        "partnership": "Partnerships, schools, communities",
+        "privacy": "Personal data",
+        "community": "Forum, reviews, moderation",
+        "other": "Other"
+      },
+      "errors": {
+        "name": "Please enter your name (2–80 characters).",
+        "email": "Please enter a valid email address.",
+        "topic": "Please choose a topic.",
+        "messageShort": "Your message needs at least 10 characters.",
+        "messageLong": "Your message can be at most 3,000 characters.",
+        "summary": "Please check the highlighted fields.",
+        "server": "Your message could not be sent. What you typed is kept — please try again."
+      },
+      "successTitle": "Message received",
+      "successBody": "Thanks for getting in touch. We'll reply by email within one working day.",
+      "sendAnother": "Send another message",
+      "infoTitle": "Contact details",
+      "hoursLabel": "Office hours",
+      "hours": "Monday – Saturday, 8:30 – 17:30",
+      "hoursNote": "Vietnam time (GMT+7). On tour nights, the trip leader contacts guests directly.",
+      "responseLabel": "Response time",
+      "response": "Within 1 working day",
+      "responseNote": "Personal data requests: within 72 hours.",
+      "ownerLabel": "Contact person",
+      "owner": "Nguyễn Đăng Trình",
+      "legalLabel": "Legal documents",
+      "faqEyebrow": "FREQUENTLY ASKED",
+      "faqTitle": "Before you go"
+    }
+  }
+}

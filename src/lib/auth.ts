@@ -5,6 +5,8 @@ import { nextCookies } from "better-auth/next-js";
 import { admin } from "better-auth/plugins";
 import { headers } from "next/headers";
 import { db, schema } from "@/db";
+import { resetPasswordMail } from "./mail-templates";
+import { sendMail } from "./mailer";
 
 // On Vercel the production domain comes from the platform; BETTER_AUTH_URL overrides it.
 const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
@@ -14,7 +16,17 @@ export const auth = betterAuth({
   baseURL,
   trustedOrigins: [baseURL, ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : [])],
   database: drizzleAdapter(db, { provider: "pg", schema }),
-  emailAndPassword: { enabled: true, minPasswordLength: 8, autoSignIn: true },
+  emailAndPassword: {
+    enabled: true,
+    minPasswordLength: 8,
+    autoSignIn: true,
+    resetPasswordTokenExpiresIn: 60 * 60,
+    // A reset means the old password may be compromised: sign every device out.
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: async ({ user, url }) => {
+      await sendMail({ to: user.email, kind: "reset-password", ...resetPasswordMail({ name: user.name, url }) });
+    },
+  },
   session: { cookieCache: { enabled: true, maxAge: 5 * 60 } },
   // nextCookies must stay last: it lets server actions set the session cookie.
   plugins: [admin(), nextCookies()],

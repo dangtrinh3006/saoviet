@@ -1,0 +1,74 @@
+{
+  "authx": {
+    "forgot": {
+      "link": "Quên mật khẩu?",
+      "title": "Quên mật khẩu",
+      "subtitle": "Nhập email của tài khoản. Nếu email tồn tại, chúng tôi sẽ gửi đường dẫn đặt lại mật khẩu, hiệu lực trong 1 giờ.",
+      "submit": "Gửi đường dẫn",
+      "sent": "Nếu email này có tài khoản tại Sao Việt, đường dẫn đặt lại mật khẩu đã được gửi. Hãy kiểm tra hộp thư (cả mục spam).",
+      "back": "Quay lại đăng nhập"
+    },
+    "reset": {
+      "title": "Đặt mật khẩu mới",
+      "subtitle": "Chọn mật khẩu mới tối thiểu 8 ký tự. Mọi phiên đăng nhập cũ sẽ bị đăng xuất.",
+      "newPassword": "Mật khẩu mới",
+      "confirmPassword": "Nhập lại mật khẩu mới",
+      "submit": "Lưu mật khẩu mới",
+      "mismatch": "Hai mật khẩu không khớp.",
+      "tooShort": "Mật khẩu cần tối thiểu 8 ký tự.",
+      "invalidToken": "Đường dẫn đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.",
+      "requestNew": "Yêu cầu đường dẫn mới",
+      "error": "Không đặt lại được mật khẩu. Vui lòng thử lại.",
+      "success": "Đã đổi mật khẩu. Bạn có thể đăng nhập bằng mật khẩu mới.",
+      "goSignIn": "Đăng nhập"
+    },
+    "admin": {
+      "resetPassword": "Đặt lại mật khẩu",
+      "sendResetEmail": "Gửi email đặt lại",
+      "setTempPassword": "Đặt mật khẩu tạm",
+      "resetEmailSent": "Đã gửi email đặt lại mật khẩu (xem Hộp thư đi).",
+      "tempPasswordLabel": "Mật khẩu tạm",
+      "tempPasswordNote": "Chỉ hiển thị một lần. Hãy chuyển cho người dùng qua kênh an toàn và đề nghị họ đổi ngay.",
+      "revokeSessions": "Thu hồi phiên đăng nhập",
+      "sessionsRevoked": "Đã thu hồi mọi phiên đăng nhập của người dùng.",
+      "confirm": "Xác nhận",
+      "cancel": "Huỷ",
+      "error": "Thao tác thất bại."
+    },
+    "outbox": {
+      "tab": "Hộp thư đi",
+      "empty": "Chưa có thư nào.",
+      "to": "Người nhận",
+      "subject": "Tiêu đề",
+      "kind": "Loại",
+      "status": "Trạng thái",
+      "time": "Thời gian",
+      "details": "Xem nội dung",
+      "error": "Lỗi gửi",
+      "kinds": { "reset-password": "Đặt lại mật khẩu", "booking-confirmation": "Xác nhận đặt tour" },
+      "statuses": { "queued": "Chờ gửi", "sent": "Đã gửi", "failed": "Lỗi" }
+    },
+    "mail": {
+      "brand": "Sao Việt",
+      "reset": {
+        "subject": "Đặt lại mật khẩu",
+        "greeting": "Chào {name},",
+        "body": "Chúng tôi nhận được yêu cầu đặt lại mật khẩu cho tài khoản Sao Việt của bạn. Bấm nút dưới đây để chọn mật khẩu mới. Đường dẫn có hiệu lực trong 1 giờ.",
+        "button": "Đặt lại mật khẩu",
+        "fallback": "Nếu nút không bấm được, mở đường dẫn sau:",
+        "ignore": "Nếu bạn không yêu cầu, hãy bỏ qua email này. Mật khẩu hiện tại vẫn giữ nguyên."
+      },
+      "booking": {
+        "subject": "Xác nhận đặt tour {code}",
+        "greeting": "Chào {name},",
+        "body": "Cảm ơn bạn đã đặt tour cùng Sao Việt. Đơn của bạn đang chờ xác nhận, chúng tôi sẽ liên hệ sớm.",
+        "code": "Mã đơn",
+        "tour": "Tour",
+        "date": "Ngày khởi hành",
+        "guests": "Số khách",
+        "total": "Tổng tiền",
+        "footer": "Giữ lại mã đơn để tra cứu trong mục Tài khoản."
+      }
+    }
+  }
+}

@@ -10,9 +10,12 @@ import type { SkyLocation } from "@/content/types";
 import { cn } from "@/lib/cn";
 import { pick } from "@/lib/l10n";
 import { streetViewEmbedUrl, type PanoSource, type PanoramaApiResponse, type StreetPano } from "@/lib/panorama-sources";
+import streetPanos from "@/content/street-panos.json";
 
 // Inlined at build time; Street View is offered only when the owner configured a key.
 const EMBED_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY;
+// Pre-resolved by scripts/find-street-panos.ts; a site without an entry has no imagery nearby.
+const STREET_PANOS: Record<string, { pano: string; distanceKm: number; date?: string }> = streetPanos;
 const ORDER: PanoSource[] = ["streetview", "mapillary", "commons", "sky"];
 
 /** Procedural equirectangular night sky (2:1) with a Milky Way band and a ridge horizon. */
@@ -165,11 +168,12 @@ export function Panorama({ location, onClose }: { location: SkyLocation; onClose
     return () => window.removeEventListener("keydown", esc);
   }, [onClose]);
 
+  const sv = STREET_PANOS[location.slug];
   const found = lookup.state === "done" ? lookup.data : null;
   const street: Partial<Record<PanoSource, StreetPano>> = {};
   if (found?.mapillary) street.mapillary = found.mapillary;
   if (found?.commons) street.commons = found.commons;
-  const available = ORDER.filter((s) => s === "sky" || (!failed.includes(s) && (s === "streetview" ? !!EMBED_KEY : !!street[s])));
+  const available = ORDER.filter((s) => s === "sky" || (!failed.includes(s) && (s === "streetview" ? !!(EMBED_KEY && sv) : !!street[s])));
   // Until the user picks, show the best source available now (the night sky while the lookup runs).
   const active: PanoSource = chosen && available.includes(chosen) ? chosen : available[0];
   const pano = active === "mapillary" || active === "commons" ? street[active] : undefined;
@@ -185,7 +189,7 @@ export function Panorama({ location, onClose }: { location: SkyLocation; onClose
   if (active === "streetview") {
     credit = (
       <>
-        {t("streetviewCredit")} <span className="text-white/50">{t("streetviewNote")}</span>
+        {t("streetviewCredit")}
       </>
     );
   } else if (pano?.source === "mapillary") {
@@ -213,7 +217,7 @@ export function Panorama({ location, onClose }: { location: SkyLocation; onClose
   let status: string | null = null;
   if (lookup.state === "loading") status = t("searching");
   else if (failed.some((s) => s !== "sky") && active === "sky") status = t("loadFailed");
-  else if (!street.mapillary && !street.commons) status = t("noneNearby");
+  else if (!sv && !street.mapillary && !street.commons) status = t("noneNearby");
 
   return createPortal(
     <div className="fixed inset-0 z-[70] flex flex-col bg-black text-white" role="dialog" aria-modal="true" aria-label={t("dialogLabel", { name })}>
@@ -254,10 +258,10 @@ export function Panorama({ location, onClose }: { location: SkyLocation; onClose
       </div>
 
       <div className="relative min-h-0 flex-1">
-        {active === "streetview" && EMBED_KEY ? (
+        {active === "streetview" && EMBED_KEY && sv ? (
           <iframe
             title={t("frameTitle", { name })}
-            src={streetViewEmbedUrl(EMBED_KEY, location.lat, location.lng, { language: locale })}
+            src={streetViewEmbedUrl(EMBED_KEY, location.lat, location.lng, { pano: sv.pano, language: locale })}
             className="absolute inset-0 size-full border-0"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
@@ -271,6 +275,13 @@ export function Panorama({ location, onClose }: { location: SkyLocation; onClose
 
       <footer className="px-4 py-2.5 text-xs leading-relaxed text-white/75 md:px-8">
         {credit}
+        {active === "streetview" && sv && (
+          <span className="text-white/50">
+            {" · "}
+            {t("distance", { km: km(sv.distanceKm) })}
+            {sv.date && ` · ${t("captured", { date: month(sv.date) })}`}
+          </span>
+        )}
         {pano && (
           <span className="text-white/50">
             {" · "}

@@ -222,10 +222,16 @@ export function commonsPanoramas(bodies: unknown | unknown[], lat: number, lng: 
 
 /* ---------------- Google Street View (Maps Embed API) ---------------- */
 
-export function streetViewEmbedUrl(key: string, lat: number, lng: number, opts: { heading?: number; pitch?: number; fov?: number; language?: string } = {}) {
+// Embed only shows imagery right at `location` (no radius), so remote sites need a pre-resolved pano id.
+export function streetViewEmbedUrl(
+  key: string,
+  lat: number,
+  lng: number,
+  opts: { pano?: string; heading?: number; pitch?: number; fov?: number; language?: string } = {},
+) {
   const q = new URLSearchParams({
     key,
-    location: `${lat},${lng}`,
+    ...(opts.pano ? { pano: opts.pano } : { location: `${lat},${lng}` }),
     heading: String(opts.heading ?? 0),
     pitch: String(opts.pitch ?? 10),
     fov: String(Math.min(100, Math.max(10, opts.fov ?? 90))),

@@ -185,4 +185,10 @@ describe("streetViewEmbedUrl", () => {
     expect(url.searchParams.get("fov")).toBe("100");
     expect(url.searchParams.get("language")).toBe("vi");
   });
+
+  it("pins a known panorama by id instead of the raw coordinate", () => {
+    const url = new URL(streetViewEmbedUrl("TEST_KEY", 21.33, 104.48, { pano: "PANO_ID" }));
+    expect(url.searchParams.get("pano")).toBe("PANO_ID");
+    expect(url.searchParams.has("location")).toBe(false);
+  });
 });

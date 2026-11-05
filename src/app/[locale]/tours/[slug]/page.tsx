@@ -10,7 +10,6 @@ import { SkyPlate } from "@/components/ui/sky-plate";
 import { locationBySlug } from "@/content/locations";
 import { getTour } from "@/server/catalog";
 import { Link } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
 import { formatCoord, pick } from "@/lib/l10n";
 import { reviewsForTour } from "@/server/queries";
 
@@ -78,14 +77,14 @@ export default async function TourPage({ params }: PageProps<"/[locale]/tours/[s
 
           <section>
             <h2 className="eyebrow mb-6">{t("highlights")}</h2>
-            <ul className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               {tour.highlights.map((h, i) => (
                 <Reveal key={i} delay={i * 0.05} className="flex gap-4 border-t hairline pt-4">
                   <span className="readout text-xs text-accent">0{i + 1}</span>
                   <p className="text-ink-muted">{pick(h, locale)}</p>
                 </Reveal>
               ))}
-            </ul>
+            </div>
           </section>
 
           <section>

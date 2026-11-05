@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ImageRef } from "@/content/types";
+import { isOptimizableImage } from "@/lib/catalog-schema";
 import { cn } from "@/lib/cn";
 
 function rng(seed: string) {
@@ -61,7 +62,13 @@ export function SkyPlate({
     <div className={cn("relative overflow-hidden bg-bg-elev", className)}>
       {usable ? (
         <>
-          <Image src={image.src} alt={image.alt.vi} fill sizes={sizes} priority={priority} className="object-cover" />
+          {isOptimizableImage(image.src) ? (
+            <Image src={image.src} alt={image.alt.vi} fill sizes={sizes} priority={priority} className="object-cover" />
+          ) : (
+            // Admin-supplied image on an arbitrary host: next/image would reject it.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={image.src} alt={image.alt.vi} loading={priority ? "eager" : "lazy"} className="absolute inset-0 size-full object-cover" />
+          )}
           {credit && (
             <a
               href={image.sourceUrl}

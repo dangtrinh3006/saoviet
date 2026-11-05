@@ -19,13 +19,16 @@ test("admin can hide a review and update an order status", async ({ page, browse
   await promoteToAdmin(a.email);
   await admin.goto("/en/admin");
   await expect(admin.getByRole("heading", { level: 1 })).toBeVisible();
+  // Orders moved from the ?tab=orders tab to their own route.
+  await admin.goto("/en/admin/orders");
   const status = admin.getByLabel("Status").first();
   await status.selectOption("confirmed");
   await expect(status).toHaveValue("confirmed");
 
   await admin.getByRole("link", { name: "Moderation" }).click();
   await expect(admin).toHaveURL(/tab=moderation/);
-  const row = admin.locator("li, tr, article, div").filter({ hasText: review }).filter({ has: admin.getByRole("button", { name: "Hide" }) }).last();
+  // Pin the row by its unique text only: a "has Hide" filter re-resolves to an ancestor once hidden.
+  const row = admin.getByRole("listitem").filter({ hasText: review });
   await row.getByRole("button", { name: "Hide" }).click();
   await expect(row.getByRole("button", { name: "Show" })).toBeVisible();
 

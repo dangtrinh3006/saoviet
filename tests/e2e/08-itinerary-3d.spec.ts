@@ -12,6 +12,13 @@ test("desktop renders the 3D itinerary with step 1 active", async ({ page }, inf
   const steps = itinerary.locator("ol > li");
   await expect(steps.first()).toHaveAttribute("aria-current", "step");
   await expect(itinerary.locator('li[aria-current="step"]')).toHaveCount(1);
+
+  // Landscape stage, and scrolling the last card into the activation zone moves the route along.
+  const stage = await itinerary.getByRole("img").boundingBox();
+  expect(stage!.width).toBeGreaterThan(stage!.height);
+  await steps.last().evaluate((el) => window.scrollBy(0, el.getBoundingClientRect().top - window.innerHeight * 0.6));
+  await expect(steps.last()).toHaveAttribute("aria-current", "step");
+  await expect(itinerary.locator('li[aria-current="step"]')).toHaveCount(1);
 });
 
 test("mobile shows the list fallback without WebGL", async ({ page }, info) => {

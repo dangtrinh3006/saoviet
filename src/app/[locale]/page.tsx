@@ -118,7 +118,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
           index="05 — SERVICES"
           title={t("servicesTitle")}
           action={
-            <Link href="/services" className="btn btn-ghost self-start md:self-auto">
+            <Link href="/services" aria-label={t("servicesTitle")} className="btn btn-ghost self-start md:self-auto">
               <ArrowRight size={16} />
             </Link>
           }

@@ -1,6 +1,5 @@
 "use client";
 
-import { Html } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import type { MotionValue } from "motion/react";
 import { type RefObject, useEffect, useMemo, useRef } from "react";
@@ -18,20 +17,25 @@ type Palette = {
   headlight: string;
   hemiSky: string;
   moon: string;
+  /** Label pills: idle background, idle text, idle border, text on the accent pill. */
+  pill: [string, string, string, string];
 };
 
 const PALETTES: Record<string, Palette> = {
   dark: {
-    fog: "#060816", low: "#0a0f24", mid: "#1a2150", high: "#3a3f86", accent: "#7dffc4", star: "#ffffff",
+    fog: "#060816", low: "#0d1330", mid: "#232c68", high: "#5a63b8", accent: "#7dffc4", star: "#ffffff",
     starAdditive: true, body: "#d8d2bd", headlight: "#ffe7b0", hemiSky: "#8b7bff", moon: "#b9c4ff",
+    pill: ["rgba(4,5,12,0.78)", "#c3c8e6", "rgba(160,170,255,0.38)", "#03140c"],
   },
   light: {
     fog: "#e3e8f3", low: "#c3cae2", mid: "#959ec9", high: "#646ca0", accent: "#4b3df5", star: "#2c2a7a",
     starAdditive: false, body: "#f4efe2", headlight: "#fff1c4", hemiSky: "#ffffff", moon: "#ffffff",
+    pill: ["rgba(255,255,255,0.9)", "#4c5374", "rgba(16,22,54,0.22)", "#ffffff"],
   },
   red: {
-    fog: "#0c0101", low: "#160202", mid: "#2c0504", high: "#4c0b07", accent: "#ff6a4d", star: "#ff5a44",
+    fog: "#0c0101", low: "#1c0303", mid: "#480a07", high: "#8c1d12", accent: "#ff6a4d", star: "#ff5a44",
     starAdditive: true, body: "#6a1a10", headlight: "#ff5a44", hemiSky: "#ff3b2a", moon: "#ff6a4d",
+    pill: ["rgba(9,0,0,0.82)", "#d0402f", "rgba(255,70,50,0.42)", "#120000"],
   },
 };
 
@@ -97,7 +101,8 @@ const smoothstep = (a: number, b: number, x: number) => {
   return t * t * (3 - 2 * t);
 };
 
-const SPAN = 46;
+/** World units between consecutive stops; the follow camera frames about two gaps. */
+const STEP_GAP = 11;
 const TUBE_SEGMENTS = 400;
 const TUBE_RADIAL = 6;
 
@@ -122,21 +127,22 @@ function buildWorld(count: number, seedKey: string): World {
 
   // Pins spread along x with a seeded sideways wiggle; lead-in/out points keep the curve open.
   const n = Math.max(1, count);
+  const span = STEP_GAP * (n - 1);
   const pinsXZ: [number, number][] = [];
   for (let i = 0; i < n; i++) {
-    const x = n === 1 ? 0 : -SPAN / 2 + (SPAN * i) / (n - 1);
-    pinsXZ.push([x, Math.sin(i * 1.9 + phase) * 3.2]);
+    const x = n === 1 ? 0 : -span / 2 + (span * i) / (n - 1);
+    pinsXZ.push([x, Math.sin(i * 1.9 + phase) * 2.4]);
   }
-  const ctrl: [number, number][] = [[pinsXZ[0][0] - 5, pinsXZ[0][1] - 1.5]];
+  const ctrl: [number, number][] = [[pinsXZ[0][0] - 9, pinsXZ[0][1] - 1.5]];
   for (let i = 0; i < n; i++) {
     ctrl.push(pinsXZ[i]);
     if (i < n - 1) {
       const [x0, z0] = pinsXZ[i];
       const [x1, z1] = pinsXZ[i + 1];
-      ctrl.push([(x0 + x1) / 2, (z0 + z1) / 2 + (rand() - 0.5) * 5]);
+      ctrl.push([(x0 + x1) / 2, (z0 + z1) / 2 + (rand() - 0.5) * 4]);
     }
   }
-  ctrl.push([pinsXZ[n - 1][0] + 5, pinsXZ[n - 1][1] + 1.5]);
+  ctrl.push([pinsXZ[n - 1][0] + 9, pinsXZ[n - 1][1] + 1.5]);
 
   const flat = new THREE.CatmullRomCurve3(ctrl.map(([x, z]) => new THREE.Vector3(x, 0, z)), false, "catmullrom", 0.5);
   const samples = flat.getSpacedPoints(240);
@@ -158,14 +164,15 @@ function buildWorld(count: number, seedKey: string): World {
   const height = (x: number, z: number) => {
     const d = distToRoute(x, z);
     const behind = z < routeZ(x);
-    const peak = behind ? 1 + smoothstep(2, 14, d) * 7.5 : 0.4 + smoothstep(2, 8, d) * 0.9;
+    const peak = behind ? 1.2 + smoothstep(2, 18, d) * 8.5 : 0.4 + smoothstep(2, 8, d) * 1.1;
     const ridge = Math.pow(fbm(x * 0.09, z * 0.09), 1.6) * peak;
     return ground(x, z) + ridge * smoothstep(1.1, 4.5, d);
   };
 
-  const plane = new THREE.PlaneGeometry(80, 34, 140, 60);
+  const width = span + 90;
+  const plane = new THREE.PlaneGeometry(width, 50, Math.round(width * 1.6), 80);
   plane.rotateX(-Math.PI / 2);
-  plane.translate(0, 0, -5);
+  plane.translate(0, 0, -11);
   const terrain = plane.toNonIndexed();
   plane.dispose();
   const pos = terrain.attributes.position as THREE.BufferAttribute;
@@ -222,7 +229,7 @@ function buildWorld(count: number, seedKey: string): World {
 
   return {
     terrain, faceHeights, maxHeight, curve, pins, pinU, roadDim, roadLit,
-    stars: dome(2800, 70), brightStars: dome(220, 66),
+    stars: dome(3600, 70), brightStars: dome(320, 66),
   };
 }
 
@@ -255,7 +262,7 @@ function Vehicle({ palette, vehicleRef }: { palette: Palette; vehicleRef: RefObj
   const wheels: [number, number][] = [[0.27, 0.3], [-0.27, 0.3], [0.27, -0.3], [-0.27, -0.3]];
   return (
     <group ref={vehicleRef}>
-      <group scale={0.9}>
+      <group scale={1.35}>
         <mesh position={[0, 0.32, 0]}>
           <boxGeometry args={[0.5, 0.26, 0.98]} />
           <meshStandardMaterial color={palette.body} flatShading roughness={0.8} />
@@ -300,44 +307,73 @@ function Vehicle({ palette, vehicleRef }: { palette: Palette; vehicleRef: RefObj
   );
 }
 
-function Pin({ position, index, state, palette, label }: {
+type PinState = "past" | "active" | "future";
+
+const LABEL_PX = 64;
+
+/** Draws a pill label once into a CanvasTexture; WebGL-only so no DOM roots live inside the canvas. */
+function makeLabel(text: string, active: boolean, palette: Palette) {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d")!;
+  const font = `600 ${LABEL_PX * 0.44}px "JetBrains Mono Variable", ui-monospace, monospace`;
+  ctx.font = font;
+  const pad = LABEL_PX * 0.42;
+  canvas.width = Math.ceil(ctx.measureText(text).width + pad * 2);
+  canvas.height = LABEL_PX;
+  const [bg, ink, line, accentInk] = palette.pill;
+  const r = LABEL_PX / 2 - 3;
+  ctx.beginPath();
+  ctx.roundRect(2, 2, canvas.width - 4, canvas.height - 4, r);
+  ctx.fillStyle = active ? palette.accent : bg;
+  ctx.fill();
+  ctx.lineWidth = 2.5;
+  ctx.strokeStyle = active ? palette.accent : line;
+  ctx.stroke();
+  ctx.font = font;
+  ctx.fillStyle = active ? accentInk : ink;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2 + 1);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 4;
+  return { texture, aspect: canvas.width / canvas.height };
+}
+
+function Pin({ position, state, palette, label }: {
   position: THREE.Vector3;
-  index: number;
-  state: "past" | "active" | "future";
+  state: PinState;
   palette: Palette;
   label: string;
 }) {
-  const glow = state === "active" ? 4 : state === "past" ? 1.6 : 0.5;
-  const scale = state === "active" ? 1.35 : 1;
+  const active = state === "active";
+  const glow = active ? 4 : state === "past" ? 1.6 : 0.5;
+  const tag = useMemo(() => makeLabel(label, active, palette), [label, active, palette]);
+  useEffect(() => () => tag.texture.dispose(), [tag]);
+  const h = active ? 0.66 : 0.56;
   return (
     <group position={position}>
-      <mesh position={[0, 0.6, 0]}>
-        <cylinderGeometry args={[0.025, 0.025, 1.2, 6]} />
-        <meshBasicMaterial color={palette.accent} transparent opacity={state === "future" ? 0.35 : 0.8} />
+      <mesh position={[0, 1, 0]}>
+        <cylinderGeometry args={[0.035, 0.035, 2, 6]} />
+        <meshBasicMaterial color={palette.accent} transparent opacity={state === "future" ? 0.4 : 0.85} />
       </mesh>
-      <mesh position={[0, 1.25, 0]} scale={scale}>
-        <octahedronGeometry args={[0.2, 0]} />
+      <mesh position={[0, 2.05, 0]} scale={active ? 1.5 : 1.1}>
+        <octahedronGeometry args={[0.24, 0]} />
         <meshStandardMaterial color={palette.accent} emissive={palette.accent} emissiveIntensity={glow} toneMapped={false} flatShading />
       </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>
-        <ringGeometry args={[0.28, 0.36, 24]} />
-        <meshBasicMaterial color={palette.accent} transparent opacity={state === "future" ? 0.25 : 0.7} side={THREE.DoubleSide} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.03, 0]} scale={active ? 1.4 : 1}>
+        <ringGeometry args={[0.38, 0.5, 32]} />
+        <meshBasicMaterial color={palette.accent} transparent opacity={state === "future" ? 0.3 : 0.75} side={THREE.DoubleSide} />
       </mesh>
-      <Html position={[0, 1.75, 0]} center zIndexRange={[10, 0]} className="pointer-events-none select-none">
-        <span
-          aria-label={label}
-          className={`readout block rounded-full border px-2 py-0.5 text-[11px] whitespace-nowrap transition-colors ${
-            state === "active" ? "border-accent bg-accent text-accent-ink" : "border-line-strong bg-bg/70 text-ink-muted"
-          }`}
-        >
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </Html>
+      <sprite position={[0, 2.85, 0]} scale={[h * tag.aspect, h, 1]} renderOrder={10}>
+        <spriteMaterial map={tag.texture} transparent depthTest={false} depthWrite={false} toneMapped={false} fog={false} />
+      </sprite>
     </group>
   );
 }
 
-const CAM_OFFSET = new THREE.Vector3(0.6, 2.5, 6.4);
+/** High, pulled-back chase view: frames the jeep, neighbouring stops, the ridge line and sky. */
+const CAM_OFFSET = new THREE.Vector3(0.8, 6.2, 13.5);
 
 function Landscape({ count, seedKey, progress, active, palette, stopLabel }: {
   count: number;
@@ -386,7 +422,7 @@ function Landscape({ count, seedKey, progress, active, palette, stopLabel }: {
     world.roadLit.setDrawRange(0, Math.floor(m.u * TUBE_SEGMENTS) * TUBE_RADIAL * 6);
 
     tmp.cam.copy(tmp.pos).add(CAM_OFFSET);
-    tmp.look.set(tmp.pos.x + tmp.tan.x * 1.5, tmp.pos.y + 0.6, tmp.pos.z - 1.2);
+    tmp.look.set(tmp.pos.x + tmp.tan.x * 2.5, tmp.pos.y + 1.6, tmp.pos.z - 4);
     if (m.primed) {
       state.camera.position.lerp(tmp.cam, k);
       m.look.lerp(tmp.look, k);
@@ -399,7 +435,7 @@ function Landscape({ count, seedKey, progress, active, palette, stopLabel }: {
     if (skyRef.current) skyRef.current.position.x = state.camera.position.x * 0.85;
     if (lightRef.current) {
       lightRef.current.position.copy(world.pins[Math.min(active, world.pins.length - 1)]);
-      lightRef.current.position.y += 1.4;
+      lightRef.current.position.y += 2.2;
     }
 
     if (Math.abs(target - m.u) > 1e-4 || state.camera.position.distanceToSquared(tmp.cam) > 1e-5) invalidate();
@@ -407,10 +443,10 @@ function Landscape({ count, seedKey, progress, active, palette, stopLabel }: {
 
   return (
     <>
-      <fog attach="fog" args={[palette.fog, 14, 48]} />
-      <hemisphereLight args={[palette.hemiSky, palette.low, palette.starAdditive ? 0.55 : 1.2]} />
-      <directionalLight position={[-12, 18, -10]} intensity={palette.starAdditive ? 0.9 : 1.6} color={palette.moon} />
-      <pointLight ref={lightRef} color={palette.accent} intensity={6} distance={6} decay={2} />
+      <fog attach="fog" args={[palette.fog, 22, 62]} />
+      <hemisphereLight args={[palette.hemiSky, palette.low, palette.starAdditive ? 1 : 1.2]} />
+      <directionalLight position={[-12, 18, -10]} intensity={palette.starAdditive ? 1.6 : 1.6} color={palette.moon} />
+      <pointLight ref={lightRef} color={palette.accent} intensity={10} distance={9} decay={2} />
 
       <group ref={skyRef}>
         <points geometry={world.stars}>
@@ -426,7 +462,7 @@ function Landscape({ count, seedKey, progress, active, palette, stopLabel }: {
           />
         </points>
         <points geometry={world.brightStars}>
-          <pointsMaterial color={palette.star} size={2.6} sizeAttenuation={false} transparent opacity={0.9} depthWrite={false} fog={false} />
+          <pointsMaterial color={palette.star} size={3} sizeAttenuation={false} transparent opacity={0.9} depthWrite={false} fog={false} />
         </points>
       </group>
 
@@ -444,9 +480,8 @@ function Landscape({ count, seedKey, progress, active, palette, stopLabel }: {
         <Pin
           key={i}
           position={p}
-          index={i}
           palette={palette}
-          label={stopLabel(i + 1)}
+          label={i === active ? stopLabel(i + 1) : String(i + 1).padStart(2, "0")}
           state={i < active ? "past" : i === active ? "active" : "future"}
         />
       ))}
@@ -468,7 +503,7 @@ export default function ItineraryScene(props: {
     <Canvas
       dpr={[1, 1.75]}
       frameloop="demand"
-      camera={{ position: [0, 3, 8], fov: 42, near: 0.1, far: 160 }}
+      camera={{ position: [0, 6, 14], fov: 40, near: 0.1, far: 200 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
       <Landscape {...props} palette={palette} />

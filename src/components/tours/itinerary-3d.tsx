@@ -42,8 +42,8 @@ const useCan3D = () =>
   useSyncExternalStore(subscribeQuery, () => window.matchMedia(QUERY).matches && hasWebGL(), () => false);
 
 /** Scroll through the list as a fractional step index: card i's top crossing the line means step i. */
-function useStepProgress(target: RefObject<HTMLElement | null>, count: number) {
-  const { scrollYProgress } = useScroll({ target, offset: ["start 0.6", "end 0.6"] });
+function useStepProgress(target: RefObject<HTMLElement | null>, count: number, line = 0.6) {
+  const { scrollYProgress } = useScroll({ target, offset: [`start ${line}`, `end ${line}`] });
   const progress = useTransform(scrollYProgress, (v) => Math.min(count - 1, Math.max(0, v * count)));
   const [active, setActive] = useState(0);
   useMotionValueEvent(progress, "change", (v) => setActive(Math.min(count - 1, Math.floor(v + 0.02))));
@@ -62,7 +62,8 @@ function Desktop3D({ steps, seedKey }: { steps: ItineraryStep[]; seedKey: string
   const listRef = useRef<HTMLOListElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const [near, setNear] = useState(false);
-  const { progress, active } = useStepProgress(listRef, steps.length);
+  // Activation line sits just below the sticky stage.
+  const { progress, active } = useStepProgress(listRef, steps.length, 0.72);
 
   useEffect(() => {
     const el = stageRef.current;
@@ -81,14 +82,15 @@ function Desktop3D({ steps, seedKey }: { steps: ItineraryStep[]; seedKey: string
   }, []);
 
   return (
-    <div data-testid="itinerary" data-mode="3d" className="grid gap-8 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
-      <div className="md:sticky md:top-28 md:self-start">
+    <div data-testid="itinerary" data-mode="3d" className="relative">
+      {/* Landscape stage pinned under the header; step cards scroll up beneath it. */}
+      <div className="sticky top-20 z-10 -mx-1 bg-bg px-1 pt-4 pb-3">
         <div
           ref={stageRef}
           role="img"
           aria-label={t("label", { count: steps.length })}
-          className="relative h-[min(68vh,560px)] overflow-hidden rounded-2xl border hairline"
-          style={{ background: "linear-gradient(to bottom, var(--bg) 0%, var(--bg-elev) 70%, var(--surface) 100%)" }}
+          className="relative aspect-video min-h-[420px] w-full overflow-hidden rounded-2xl border hairline shadow-[0_18px_40px_-28px_var(--glow)]"
+          style={{ background: "linear-gradient(to bottom, var(--bg) 0%, var(--bg-elev) 60%, var(--surface) 100%)" }}
         >
           {near ? (
             <ItineraryScene
@@ -97,35 +99,54 @@ function Desktop3D({ steps, seedKey }: { steps: ItineraryStep[]; seedKey: string
               progress={progress}
               active={active}
               theme={theme}
-              stopLabel={(n) => t("stop", { n })}
+              stopLabel={(n) => t("stop", { n: String(n).padStart(2, "0") })}
             />
           ) : (
             <p className="readout absolute inset-0 grid place-items-center text-xs text-ink-faint">{t("loading")}</p>
           )}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 bg-gradient-to-t from-bg/90 to-transparent px-5 pt-10 pb-4">
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-4 bg-gradient-to-b from-bg/80 to-transparent px-5 pt-4 pb-10">
             <p className="readout text-xs text-accent" aria-live="polite">
               {t("progress", { current: active + 1, total: steps.length })}
             </p>
-            <p className="eyebrow truncate">{t("hint")}</p>
+            <div aria-hidden className="flex gap-1.5 pt-1">
+              {steps.map((_, i) => (
+                <span
+                  key={i}
+                  className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-6 bg-accent" : i < active ? "w-3 bg-accent/60" : "w-3 bg-line-strong"}`}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg/90 via-bg/50 to-transparent px-5 pt-14 pb-4">
+            <p className="readout text-[11px] text-accent">{t("stop", { n: String(active + 1).padStart(2, "0") })}</p>
+            <p className="display mt-1 truncate text-xl">{steps[active].title}</p>
           </div>
         </div>
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-full h-10 bg-gradient-to-b from-bg to-transparent" />
       </div>
 
-      <ol ref={listRef}>
+      <p className="eyebrow mt-5 mb-4">{t("hint")}</p>
+      <ol ref={listRef} className="relative border-l hairline pl-8">
         {steps.map((step, i) => (
           <li
             key={i}
             aria-current={i === active ? "step" : undefined}
             data-active={i === active || undefined}
-            className="flex min-h-[46vh] flex-col pb-8"
+            className="relative flex min-h-[34vh] flex-col pb-6"
           >
+            <span
+              aria-hidden
+              className={`absolute top-6 -left-[2.32rem] size-3 rounded-full ring-4 ring-bg transition-colors duration-500 ${
+                i <= active ? "bg-accent" : "bg-line-strong"
+              }`}
+            />
             <div
-              className={`card p-6 transition-[opacity,border-color,transform] duration-500 ${
-                i === active ? "border-accent/60 opacity-100" : i < active ? "opacity-60" : "opacity-45"
+              className={`card p-6 transition-[opacity,border-color] duration-500 ${
+                i === active ? "border-accent/60 opacity-100" : i < active ? "opacity-90" : "opacity-80"
               }`}
             >
               <p className="readout text-xs text-accent">{t("stop", { n: String(i + 1).padStart(2, "0") })}</p>
-              <h3 className="display mt-3 text-2xl">{step.title}</h3>
+              <h3 className="display mt-2 text-2xl">{step.title}</h3>
               <p className="mt-2 leading-relaxed text-ink-muted">{step.body}</p>
             </div>
           </li>

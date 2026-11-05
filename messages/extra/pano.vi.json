@@ -1,1 +1,26 @@
-{}
+{
+  "pano": {
+    "dialogLabel": "Toàn cảnh 360° tại {name}",
+    "close": "Đóng",
+    "sourcesLabel": "Nguồn ảnh",
+    "source": {
+      "streetview": "Street View",
+      "mapillary": "Mapillary",
+      "commons": "Commons",
+      "sky": "Bầu trời đêm"
+    },
+    "searching": "Đang tìm ảnh 360° mặt đất ở gần…",
+    "noneNearby": "Chưa có ảnh 360° mặt đất nào ở gần",
+    "loadFailed": "Không tải được ảnh này — đang hiển thị bầu trời đêm.",
+    "distance": "cách điểm ngắm {km} km",
+    "captured": "chụp {date}",
+    "streetviewCredit": "Hình ảnh và dữ liệu bản đồ © Google — hiển thị qua khung nhúng chính thức của Google Maps.",
+    "streetviewNote": "Street View hiển thị ảnh toàn cảnh gần nhất mà Google có; điểm ở vùng xa có thể chưa có.",
+    "mapillaryCredit": "Ảnh từ <link>Mapillary</link> của <profile>@{author}</profile>, <license>CC BY-SA 4.0</license>",
+    "mapillaryCreditAnon": "Ảnh từ cộng đồng <link>Mapillary</link>, <license>CC BY-SA 4.0</license>",
+    "commonsCredit": "<file>{title}</file> của {author}, <license>{licenseName}</license>, qua <link>Wikimedia Commons</link>",
+    "skyCredit": "Bầu trời đêm: <link>{credit}</link>, {license}",
+    "skyProcedural": "Bầu trời đêm: hình minh hoạ dựng trong trình duyệt",
+    "frameTitle": "Google Street View gần {name}"
+  }
+}

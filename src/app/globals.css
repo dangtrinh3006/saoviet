@@ -14,7 +14,7 @@
   --line-strong: rgb(160 170 255 / 0.22);
   --ink: #eef0ff;
   --ink-muted: #9097b8;
-  --ink-faint: #5d6488;
+  --ink-faint: #7d85ab;
   --accent: #7dffc4;
   --accent-ink: #03140c;
   --aurora: #8b7bff;
@@ -34,7 +34,7 @@
   --line-strong: rgb(16 22 54 / 0.2);
   --ink: #0a0e24;
   --ink-muted: #4c5374;
-  --ink-faint: #8a90aa;
+  --ink-faint: #5c6382;
   --accent: #4b3df5;
   --accent-ink: #ffffff;
   --aurora: #00a383;
@@ -54,8 +54,8 @@
   --line: rgb(255 70 50 / 0.16);
   --line-strong: rgb(255 70 50 / 0.32);
   --ink: #ff5a44;
-  --ink-muted: #b8362a;
-  --ink-faint: #7a2018;
+  --ink-muted: #e85a48;
+  --ink-faint: #d64a3a;
   --accent: #ff6a4d;
   --accent-ink: #120000;
   --aurora: #ff3b2a;

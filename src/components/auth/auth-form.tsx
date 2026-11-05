@@ -84,7 +84,7 @@ export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
         {mode === "sign-in" ? t("noAccount") : t("haveAccount")}{" "}
         <Link
           href={`/${mode === "sign-in" ? "sign-up" : "sign-in"}${params.get("next") ? `?next=${encodeURIComponent(next)}` : ""}`}
-          className="text-accent underline-offset-4 hover:underline"
+          className="text-accent underline underline-offset-4"
         >
           {mode === "sign-in" ? t("signUp") : t("signIn")}
         </Link>

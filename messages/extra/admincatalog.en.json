@@ -1,1 +1,172 @@
-{}
+{
+  "admincatalog": {
+    "eyebrow": "TOUR MANAGEMENT",
+    "title": "Journeys",
+    "subtitle": "Every tour in every status. Drafts and archived tours are hidden from the public site.",
+    "newEyebrow": "NEW",
+    "newTitle": "New tour",
+    "empty": "No tours match these filters.",
+    "actions": {
+      "new": "New tour",
+      "edit": "Edit",
+      "duplicate": "Duplicate",
+      "publish": "Publish",
+      "unpublish": "Unpublish",
+      "archive": "Archive",
+      "delete": "Delete",
+      "confirmDelete": "Delete permanently",
+      "cancel": "Cancel",
+      "backToList": "All tours",
+      "saving": "Saving…",
+      "create": "Create tour",
+      "save": "Save changes",
+      "viewPublic": "View public page"
+    },
+    "filters": {
+      "search": "Search",
+      "searchPlaceholder": "Code, title, slug or location",
+      "status": "Status",
+      "all": "All",
+      "apply": "Filter",
+      "clear": "Clear",
+      "count": "{count} of {total} tours"
+    },
+    "cols": {
+      "code": "Code",
+      "title": "Title",
+      "location": "Location",
+      "price": "Price / guest",
+      "nights": "Nights",
+      "status": "Status",
+      "featured": "Featured",
+      "updated": "Updated",
+      "actions": "Actions"
+    },
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "archived": "Archived"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "moderate": "Moderate",
+      "hard": "Hard"
+    },
+    "lang": {
+      "vi": "Tiếng Việt",
+      "en": "English"
+    },
+    "sections": {
+      "basics": "Essentials",
+      "highlights": "Highlights",
+      "itinerary": "Itinerary",
+      "includes": "Includes",
+      "publish": "Publishing",
+      "image": "Cover image"
+    },
+    "fields": {
+      "code": "Tour code",
+      "slug": "Slug (URL)",
+      "slugHint": "Generated from the Vietnamese title; editable until the tour is created, fixed afterwards.",
+      "slugLocked": "The slug is fixed after creation because bookings reference it.",
+      "title": "Title",
+      "tagline": "Tagline",
+      "location": "Observing site",
+      "locationPlaceholder": "Choose a site…",
+      "locationHint": "Sites and their SQM values live in the code; for a new site, send a request to the developers.",
+      "nights": "Nights",
+      "difficulty": "Difficulty",
+      "priceVnd": "Price (VND / guest)",
+      "priceHint": "Existing bookings keep the price they were made at.",
+      "maxGuests": "Max guests",
+      "status": "Status",
+      "statusHint": {
+        "draft": "Visible to admins only.",
+        "published": "Shown on the home page, the tours list and the map.",
+        "archived": "Hidden from the public site; past bookings are kept."
+      },
+      "featured": "Featured tour",
+      "featuredHint": "Shown first on the home page.",
+      "sortOrder": "Sort order",
+      "sortOrderHint": "Lower numbers come first."
+    },
+    "lists": {
+      "empty": "Nothing here yet.",
+      "addHighlight": "Add highlight",
+      "highlight": "Highlight {n}",
+      "addStep": "Add step",
+      "stepTitle": "Step {n} — title",
+      "stepBody": "Step {n} — body",
+      "addInclude": "Add included item",
+      "include": "Included {n}",
+      "moveUp": "Move item {n} up",
+      "moveDown": "Move item {n} down",
+      "remove": "Remove item {n}"
+    },
+    "image": {
+      "src": "Image URL",
+      "srcHint": "https on one of: {hosts}; or a site path starting with /. Leave blank to use the illustrated sky.",
+      "alt": "Alt text",
+      "credit": "Credit",
+      "license": "Licence",
+      "sourceUrl": "Source URL",
+      "noImage": "No image yet — public pages draw an illustrated sky.",
+      "previewFailed": "The image at this URL could not be loaded."
+    },
+    "notice": {
+      "hasOrders": "This tour has bookings or reviews, so it cannot be deleted. Archive it instead — bookings keep the price they were made at.",
+      "failed": "That did not work. Please try again.",
+      "VALIDATION": "Check the highlighted fields",
+      "SLUG_TAKEN": "This slug is already in use",
+      "CODE_TAKEN": "This tour code is already in use",
+      "NOT_FOUND": "This tour no longer exists",
+      "HAS_ORDERS": "This tour has bookings",
+      "FAILED": "Not saved — your input is kept, please try again",
+      "saved": "Saved",
+      "created": "Tour created",
+      "unsaved": "Unsaved changes",
+      "clean": "No changes"
+    },
+    "errors": {
+      "required": "Required",
+      "tooLong": "Too long",
+      "tooSmall": "Too small",
+      "tooLarge": "Too large",
+      "number": "Must be a number",
+      "integer": "Must be a whole number",
+      "slug": "Lowercase letters, digits and hyphens only (at least 3)",
+      "code": "Format SV-01 to SV-999",
+      "location": "Choose a site",
+      "https": "Must be an https URL",
+      "imageHost": "Only https from an allowed image host, or a path starting with /",
+      "tooMany": "Too many items",
+      "slugTaken": "Another tour already uses this slug",
+      "codeTaken": "Another tour already uses this code",
+      "invalid": "Invalid value"
+    },
+    "request": {
+      "open": "Suggest a new location / 3D scene / 360° photo",
+      "heading": "Request for the developers",
+      "intro": "Sites, 3D scenes and 360° photos are built in code and cannot be created online. Your request goes into a queue for the developers.",
+      "close": "Close",
+      "kind": "Request type",
+      "kinds": {
+        "location": "New location",
+        "3d": "3D scene",
+        "panorama": "360° photo",
+        "other": "Other"
+      },
+      "title": "Title",
+      "nameVi": "Site name (VI)",
+      "nameEn": "Site name (EN)",
+      "lat": "Latitude",
+      "lng": "Longitude",
+      "notes": "Notes (optional)",
+      "details": "Details",
+      "submit": "Send request",
+      "sending": "Sending…",
+      "success": "Sent. The request is now in the “Hàng chờ duyệt” (review queue).",
+      "another": "Send another request"
+    }
+  }
+}

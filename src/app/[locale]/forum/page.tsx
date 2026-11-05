@@ -1,7 +1,7 @@
 import { MessageSquare, Pin, Plus } from "@/components/ui/icons";
 import type { Metadata } from "next";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { listThreads } from "@/server/queries";
@@ -62,8 +62,7 @@ export default async function ForumPage({ params, searchParams }: PageProps<"/[l
       ) : (
         <ol className="mt-10 divide-y divide-line border-y hairline">
           {threads.map((th, i) => (
-            <Reveal key={th.id} delay={Math.min(i, 8) * 0.03}>
-              <li>
+            <RevealItem key={th.id} delay={Math.min(i, 8) * 0.03}>
                 <Link href={`/forum/${th.slug}`} className="group grid grid-cols-[auto_1fr_auto] items-start gap-4 py-6 md:gap-6">
                   <span className="readout pt-1.5 text-xs text-ink-faint">{String(i + 1).padStart(2, "0")}</span>
                   <div className="min-w-0">
@@ -85,8 +84,7 @@ export default async function ForumPage({ params, searchParams }: PageProps<"/[l
                     <span className="sr-only">{t("replies", { count: th.replies })}</span>
                   </span>
                 </Link>
-              </li>
-            </Reveal>
+              </RevealItem>
           ))}
         </ol>
       )}

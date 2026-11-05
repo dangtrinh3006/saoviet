@@ -1,1 +1,26 @@
-{}
+{
+  "pano": {
+    "dialogLabel": "360° view of {name}",
+    "close": "Close",
+    "sourcesLabel": "Image source",
+    "source": {
+      "streetview": "Street View",
+      "mapillary": "Mapillary",
+      "commons": "Commons",
+      "sky": "Night sky"
+    },
+    "searching": "Looking for street-level 360° images nearby…",
+    "noneNearby": "No street-level 360° image found nearby",
+    "loadFailed": "This image could not be loaded — showing the night sky instead.",
+    "distance": "{km} km from the site",
+    "captured": "captured {date}",
+    "streetviewCredit": "Imagery and map data © Google — shown in the official Google Maps embed.",
+    "streetviewNote": "Street View shows the closest panorama Google has; remote sites may have none.",
+    "mapillaryCredit": "Image from <link>Mapillary</link> by <profile>@{author}</profile>, <license>CC BY-SA 4.0</license>",
+    "mapillaryCreditAnon": "Image from <link>Mapillary</link> contributors, <license>CC BY-SA 4.0</license>",
+    "commonsCredit": "<file>{title}</file> by {author}, <license>{licenseName}</license>, via <link>Wikimedia Commons</link>",
+    "skyCredit": "Night sky: <link>{credit}</link>, {license}",
+    "skyProcedural": "Night sky: illustration generated in the browser",
+    "frameTitle": "Google Street View near {name}"
+  }
+}

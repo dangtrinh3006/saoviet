@@ -47,3 +47,4 @@ test-results/
 playwright-report/
 .seed-credentials.*.local
 .idea/
+.prod-local.log

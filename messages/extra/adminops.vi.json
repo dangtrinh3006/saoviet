@@ -1,1 +1,147 @@
-{}
+{
+  "adminops": {
+    "nav": {
+      "label": "Các mục quản trị",
+      "overview": "Tổng quan",
+      "tours": "Tour",
+      "services": "Dịch vụ",
+      "orders": "Đơn hàng",
+      "queue": "Hàng chờ duyệt",
+      "users": "Người dùng",
+      "outbox": "Hộp thư đi",
+      "moderation": "Kiểm duyệt",
+      "openCount": "{count} đang mở"
+    },
+    "common": {
+      "status": "Trạng thái",
+      "save": "Lưu",
+      "saving": "Đang lưu…",
+      "saved": "Đã lưu",
+      "cancel": "Huỷ",
+      "back": "Quay lại",
+      "edit": "Sửa",
+      "delete": "Xoá",
+      "confirmDelete": "Xác nhận xoá",
+      "error": "Có lỗi xảy ra. Dữ liệu bạn nhập vẫn được giữ, vui lòng thử lại.",
+      "invalid": "Một số trường chưa hợp lệ. Vui lòng kiểm tra lại.",
+      "empty": "Chưa có mục nào.",
+      "viewAll": "Xem tất cả"
+    },
+    "dashboard": {
+      "eyebrow": "PHÒNG ĐIỀU HÀNH",
+      "title": "Vận hành",
+      "revenue": "Doanh thu (trừ đơn huỷ)",
+      "ordersByStatus": "Đơn theo trạng thái",
+      "upcoming": "Khởi hành trong 14 ngày tới",
+      "upcomingEmpty": "Không có chuyến khởi hành từ {from} đến {to}.",
+      "openChanges": "Yêu cầu thay đổi đang mở",
+      "outbox": "Thư gửi đi gần nhất",
+      "guests": "{count} khách"
+    },
+    "services": {
+      "title": "Dịch vụ",
+      "subtitle": "Hiển thị trên trang Dịch vụ theo đúng thứ tự này. Chỉ mục đã xuất bản mới hiện công khai.",
+      "new": "Thêm dịch vụ",
+      "edit": "Sửa dịch vụ",
+      "moveUp": "Đưa {name} lên",
+      "moveDown": "Đưa {name} xuống",
+      "fromVnd": "Giá từ (VND)",
+      "slug": "Slug",
+      "slugHint": "Chữ thường, số và dấu gạch ngang. Không đổi được sau khi tạo.",
+      "icon": "Biểu tượng",
+      "iconPreview": "Xem trước biểu tượng",
+      "titleVi": "Tên (tiếng Việt)",
+      "titleEn": "Tên (tiếng Anh)",
+      "bodyVi": "Mô tả (tiếng Việt)",
+      "bodyEn": "Mô tả (tiếng Anh)",
+      "slugTaken": "Slug này đã được dịch vụ khác dùng.",
+      "icons": {
+        "telescope": "Kính thiên văn",
+        "camera": "Máy ảnh",
+        "tent": "Lều trại",
+        "users": "Nhóm",
+        "graduation": "Khoá học",
+        "moon": "Mặt trăng"
+      },
+      "statuses": {
+        "draft": "Bản nháp",
+        "published": "Đã xuất bản",
+        "archived": "Lưu trữ"
+      }
+    },
+    "orders": {
+      "title": "Đơn hàng",
+      "search": "Tìm kiếm",
+      "searchPlaceholder": "Mã đơn, tên, email hoặc số điện thoại",
+      "allStatuses": "Mọi trạng thái",
+      "allTours": "Mọi tour",
+      "tour": "Tour",
+      "from": "Khởi hành từ",
+      "to": "Khởi hành đến",
+      "sort": "Sắp xếp",
+      "apply": "Lọc",
+      "reset": "Bỏ lọc",
+      "exportCsv": "Xuất CSV",
+      "count": "{count, plural, =0 {Không có đơn} other {# đơn}}",
+      "pageOf": "Trang {page}/{pages}",
+      "prev": "Trước",
+      "next": "Sau",
+      "code": "Mã",
+      "contact": "Liên hệ",
+      "departure": "Khởi hành",
+      "guests": "Số khách",
+      "unitPrice": "Giá mỗi khách",
+      "total": "Tổng",
+      "created": "Ngày tạo",
+      "open": "Mở",
+      "sorts": {
+        "created_desc": "Mới nhất",
+        "created_asc": "Cũ nhất",
+        "departure_asc": "Khởi hành sớm nhất",
+        "departure_desc": "Khởi hành muộn nhất",
+        "total_desc": "Tổng cao nhất",
+        "total_asc": "Tổng thấp nhất"
+      },
+      "detail": "Đơn {code}",
+      "contactName": "Tên liên hệ",
+      "contactEmail": "Email liên hệ",
+      "contactPhone": "Điện thoại liên hệ",
+      "note": "Ghi chú và nhật ký",
+      "activityNote": "Ghi chú thao tác",
+      "activityHint": "Lý do thay đổi. Được thêm vào nhật ký kèm email của bạn và thời điểm.",
+      "totalHint": "Tổng tiền được tính lại theo giá mỗi khách lúc đặt.",
+      "deleted": "Đã xoá đơn."
+    },
+    "queue": {
+      "title": "Hàng chờ duyệt",
+      "explain": "Các mục ở đây cần lập trình viên triển khai bằng mã — điểm trời tối mới, cảnh 3D, ảnh 360°.",
+      "all": "Tất cả",
+      "kind": "Loại",
+      "createdBy": "Người yêu cầu",
+      "created": "Ngày tạo",
+      "resolved": "Ngày xử lý",
+      "details": "Chi tiết",
+      "payload": "Dữ liệu kèm theo",
+      "noPayload": "Không có dữ liệu kèm theo.",
+      "resolutionNote": "Ghi chú xử lý",
+      "resolutionHint": "Bắt buộc khi từ chối.",
+      "noteRequired": "Cần ghi chú xử lý trước khi từ chối.",
+      "markInProgress": "Đang xử lý",
+      "markDone": "Hoàn tất",
+      "markRejected": "Từ chối",
+      "statuses": {
+        "open": "Đang mở",
+        "in_progress": "Đang xử lý",
+        "done": "Hoàn tất",
+        "rejected": "Từ chối"
+      },
+      "kinds": {
+        "location": "Điểm trời tối",
+        "panorama": "Ảnh 360°",
+        "3d": "Cảnh 3D",
+        "content": "Nội dung",
+        "other": "Khác"
+      }
+    }
+  }
+}

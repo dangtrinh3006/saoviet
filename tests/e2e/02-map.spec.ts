@@ -4,7 +4,8 @@ test.describe("Dark-sky map", () => {
   test("deep link opens a location panel with sky data", async ({ page }) => {
     await page.goto("/en/map?l=ta-xua");
     const panel = page.locator("aside");
-    await expect(panel.getByRole("heading", { name: "Tà Xùa" })).toBeVisible();
+    // Headless WebGL (globe + terrain) is slow to reach style.load; the panel opens after it.
+    await expect(panel.getByRole("heading", { name: "Tà Xùa" })).toBeVisible({ timeout: 45_000 });
     await expect(panel).toContainText("21.72");
     await expect(page.locator("canvas.maplibregl-canvas")).toBeVisible();
   });
@@ -12,6 +13,7 @@ test.describe("Dark-sky map", () => {
   test("picking from the list selects that site", async ({ page }, info) => {
     test.skip(info.project.name === "mobile", "list is collapsed behind the search on mobile");
     await page.goto("/en/map");
+    await page.waitForLoadState("networkidle");
     await page.getByRole("button", { name: /Côn Đảo/ }).first().click();
     await expect(page.locator("aside").getByRole("heading", { name: /Côn Đảo/ })).toBeVisible();
   });

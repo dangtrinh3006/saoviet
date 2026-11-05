@@ -1,1 +1,172 @@
-{}
+{
+  "admincatalog": {
+    "eyebrow": "QUẢN LÝ TOUR",
+    "title": "Hành trình",
+    "subtitle": "Mọi tour ở mọi trạng thái. Bản nháp và tour đã lưu trữ không hiện trên trang công khai.",
+    "newEyebrow": "TẠO MỚI",
+    "newTitle": "Tour mới",
+    "empty": "Không có tour nào khớp bộ lọc.",
+    "actions": {
+      "new": "Tạo tour",
+      "edit": "Sửa",
+      "duplicate": "Nhân bản",
+      "publish": "Xuất bản",
+      "unpublish": "Gỡ xuất bản",
+      "archive": "Lưu trữ",
+      "delete": "Xoá",
+      "confirmDelete": "Xoá vĩnh viễn",
+      "cancel": "Huỷ",
+      "backToList": "Danh sách",
+      "saving": "Đang lưu…",
+      "create": "Tạo tour",
+      "save": "Lưu thay đổi",
+      "viewPublic": "Xem trang công khai"
+    },
+    "filters": {
+      "search": "Tìm kiếm",
+      "searchPlaceholder": "Mã, tên, slug hoặc địa điểm",
+      "status": "Trạng thái",
+      "all": "Tất cả",
+      "apply": "Lọc",
+      "clear": "Bỏ lọc",
+      "count": "{count} / {total} tour"
+    },
+    "cols": {
+      "code": "Mã",
+      "title": "Tên tour",
+      "location": "Địa điểm",
+      "price": "Giá / khách",
+      "nights": "Đêm",
+      "status": "Trạng thái",
+      "featured": "Nổi bật",
+      "updated": "Cập nhật",
+      "actions": "Thao tác"
+    },
+    "status": {
+      "draft": "Bản nháp",
+      "published": "Đã xuất bản",
+      "archived": "Lưu trữ"
+    },
+    "difficulty": {
+      "easy": "Dễ",
+      "moderate": "Vừa",
+      "hard": "Khó"
+    },
+    "lang": {
+      "vi": "Tiếng Việt",
+      "en": "English"
+    },
+    "sections": {
+      "basics": "Thông tin chính",
+      "highlights": "Điểm nhấn",
+      "itinerary": "Lịch trình",
+      "includes": "Bao gồm",
+      "publish": "Xuất bản",
+      "image": "Ảnh bìa"
+    },
+    "fields": {
+      "code": "Mã tour",
+      "slug": "Slug (đường dẫn)",
+      "slugHint": "Tự tạo từ tên tiếng Việt; có thể sửa trước khi tạo, sau đó không đổi được.",
+      "slugLocked": "Slug cố định sau khi tạo vì đơn đặt chỗ tham chiếu tới nó.",
+      "title": "Tên tour",
+      "tagline": "Mô tả ngắn",
+      "location": "Địa điểm quan sát",
+      "locationPlaceholder": "Chọn địa điểm…",
+      "locationHint": "Danh sách địa điểm và chỉ số SQM nằm trong mã nguồn; cần địa điểm mới thì gửi đề xuất cho đội phát triển.",
+      "nights": "Số đêm",
+      "difficulty": "Độ khó",
+      "priceVnd": "Giá (VND / khách)",
+      "priceHint": "Đơn đã đặt giữ nguyên giá lúc đặt.",
+      "maxGuests": "Số khách tối đa",
+      "status": "Trạng thái",
+      "statusHint": {
+        "draft": "Chỉ quản trị viên thấy.",
+        "published": "Hiện trên trang chủ, danh sách tour và bản đồ.",
+        "archived": "Ẩn khỏi trang công khai; đơn cũ vẫn giữ nguyên."
+      },
+      "featured": "Tour nổi bật",
+      "featuredHint": "Ưu tiên hiển thị ở trang chủ.",
+      "sortOrder": "Thứ tự hiển thị",
+      "sortOrderHint": "Số nhỏ hơn hiện trước."
+    },
+    "lists": {
+      "empty": "Chưa có mục nào.",
+      "addHighlight": "Thêm điểm nhấn",
+      "highlight": "Điểm nhấn {n}",
+      "addStep": "Thêm chặng",
+      "stepTitle": "Chặng {n} — tiêu đề",
+      "stepBody": "Chặng {n} — nội dung",
+      "addInclude": "Thêm mục bao gồm",
+      "include": "Bao gồm {n}",
+      "moveUp": "Đưa mục {n} lên",
+      "moveDown": "Đưa mục {n} xuống",
+      "remove": "Xoá mục {n}"
+    },
+    "image": {
+      "src": "URL ảnh",
+      "srcHint": "https trên một trong các máy chủ: {hosts}; hoặc đường dẫn nội bộ bắt đầu bằng /. Để trống thì dùng bầu trời minh hoạ.",
+      "alt": "Mô tả ảnh (alt)",
+      "credit": "Tác giả",
+      "license": "Giấy phép",
+      "sourceUrl": "URL nguồn",
+      "noImage": "Chưa có ảnh — trang công khai sẽ vẽ bầu trời minh hoạ.",
+      "previewFailed": "Không tải được ảnh từ URL này."
+    },
+    "notice": {
+      "hasOrders": "Tour đã có đơn đặt chỗ hoặc đánh giá nên không xoá được. Hãy lưu trữ tour — đơn cũ giữ nguyên giá đã đặt.",
+      "failed": "Không thực hiện được. Thử lại sau.",
+      "VALIDATION": "Kiểm tra lại các ô được đánh dấu",
+      "SLUG_TAKEN": "Slug này đã được dùng",
+      "CODE_TAKEN": "Mã tour này đã được dùng",
+      "NOT_FOUND": "Tour không còn tồn tại",
+      "HAS_ORDERS": "Tour đã có đơn đặt chỗ",
+      "FAILED": "Lưu không thành công — nội dung bạn nhập vẫn còn, thử lại sau",
+      "saved": "Đã lưu",
+      "created": "Đã tạo tour",
+      "unsaved": "Có thay đổi chưa lưu",
+      "clean": "Không có thay đổi"
+    },
+    "errors": {
+      "required": "Bắt buộc",
+      "tooLong": "Quá dài",
+      "tooSmall": "Giá trị quá nhỏ",
+      "tooLarge": "Giá trị quá lớn",
+      "number": "Phải là số",
+      "integer": "Phải là số nguyên",
+      "slug": "Chỉ chữ thường không dấu, số và gạch nối (tối thiểu 3 ký tự)",
+      "code": "Dạng SV-01 đến SV-999",
+      "location": "Chọn một địa điểm",
+      "https": "Phải là URL https",
+      "imageHost": "Chỉ nhận https từ máy chủ ảnh được phép, hoặc đường dẫn bắt đầu bằng /",
+      "tooMany": "Quá nhiều mục",
+      "slugTaken": "Slug đã được dùng cho tour khác",
+      "codeTaken": "Mã đã được dùng cho tour khác",
+      "invalid": "Giá trị không hợp lệ"
+    },
+    "request": {
+      "open": "Đề xuất địa điểm mới / cảnh 3D / ảnh 360°",
+      "heading": "Yêu cầu cần đội phát triển",
+      "intro": "Địa điểm, cảnh 3D và ảnh 360° được dựng trong mã nguồn, không tạo trực tuyến được. Yêu cầu sẽ vào hàng chờ để đội phát triển thực hiện.",
+      "close": "Đóng",
+      "kind": "Loại yêu cầu",
+      "kinds": {
+        "location": "Địa điểm mới",
+        "3d": "Cảnh 3D",
+        "panorama": "Ảnh 360°",
+        "other": "Khác"
+      },
+      "title": "Tiêu đề",
+      "nameVi": "Tên địa điểm (VI)",
+      "nameEn": "Tên địa điểm (EN)",
+      "lat": "Vĩ độ",
+      "lng": "Kinh độ",
+      "notes": "Ghi chú (không bắt buộc)",
+      "details": "Mô tả chi tiết",
+      "submit": "Gửi yêu cầu",
+      "sending": "Đang gửi…",
+      "success": "Đã gửi. Yêu cầu đang nằm trong hàng đợi “Hàng chờ duyệt”.",
+      "another": "Gửi yêu cầu khác"
+    }
+  }
+}

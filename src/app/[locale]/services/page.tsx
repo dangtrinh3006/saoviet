@@ -1,7 +1,7 @@
 import { ArrowRight, Camera, GraduationCap, Moon, Telescope, Tent, Users } from "@/components/ui/icons";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 import { listServices } from "@/server/catalog";
 import type { Service } from "@/content/types";
 import { Link } from "@/i18n/navigation";
@@ -46,8 +46,7 @@ export default async function ServicesPage({ params }: PageProps<"/[locale]/serv
           {services.map((s, i) => {
             const Icon = ICONS[s.icon];
             return (
-              <Reveal key={s.slug} delay={i * 0.04}>
-                <li className="group grid grid-cols-[auto_1fr] gap-x-5 gap-y-4 border-b hairline py-8 md:grid-cols-[5rem_auto_1fr_auto] md:items-center md:gap-x-10 md:py-12">
+              <RevealItem key={s.slug} delay={i * 0.04} className="group grid grid-cols-[auto_1fr] gap-x-5 gap-y-4 border-b hairline py-8 md:grid-cols-[5rem_auto_1fr_auto] md:items-center md:gap-x-10 md:py-12">
                   <span className="readout text-xs text-ink-faint md:text-sm">S-{String(i + 1).padStart(2, "0")}</span>
                   <span className="grid size-12 place-items-center rounded-full ring-1 ring-line transition-colors group-hover:bg-accent group-hover:text-accent-ink md:order-none md:size-16">
                     <Icon size={22} strokeWidth={1.5} />
@@ -60,8 +59,7 @@ export default async function ServicesPage({ params }: PageProps<"/[locale]/serv
                     <span className="eyebrow block">{t("fromPrice")}</span>
                     <span className="readout mt-1 block text-xl text-ink">{formatVnd(s.fromVnd, locale)}</span>
                   </p>
-                </li>
-              </Reveal>
+                </RevealItem>
             );
           })}
         </ol>

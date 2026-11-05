@@ -1,1 +1,147 @@
-{}
+{
+  "adminops": {
+    "nav": {
+      "label": "Admin sections",
+      "overview": "Overview",
+      "tours": "Tours",
+      "services": "Services",
+      "orders": "Orders",
+      "queue": "Change queue",
+      "users": "Users",
+      "outbox": "Outbox",
+      "moderation": "Moderation",
+      "openCount": "{count} open"
+    },
+    "common": {
+      "status": "Status",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved",
+      "cancel": "Cancel",
+      "back": "Back",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Confirm delete",
+      "error": "Something went wrong. Your input is kept; please try again.",
+      "invalid": "Some fields are invalid. Check the values and try again.",
+      "empty": "Nothing here yet.",
+      "viewAll": "View all"
+    },
+    "dashboard": {
+      "eyebrow": "CONTROL ROOM",
+      "title": "Operations",
+      "revenue": "Revenue (excl. cancelled)",
+      "ordersByStatus": "Orders by status",
+      "upcoming": "Departures in the next 14 days",
+      "upcomingEmpty": "No departures between {from} and {to}.",
+      "openChanges": "Open change requests",
+      "outbox": "Latest outgoing mail",
+      "guests": "{count, plural, one {# guest} other {# guests}}"
+    },
+    "services": {
+      "title": "Services",
+      "subtitle": "Shown on the public Services page in this order. Only published items are visible.",
+      "new": "New service",
+      "edit": "Edit service",
+      "moveUp": "Move {name} up",
+      "moveDown": "Move {name} down",
+      "fromVnd": "From (VND)",
+      "slug": "Slug",
+      "slugHint": "Lowercase letters, digits and hyphens. Cannot be changed later.",
+      "icon": "Icon",
+      "iconPreview": "Icon preview",
+      "titleVi": "Title (Vietnamese)",
+      "titleEn": "Title (English)",
+      "bodyVi": "Description (Vietnamese)",
+      "bodyEn": "Description (English)",
+      "slugTaken": "That slug is already used by another service.",
+      "icons": {
+        "telescope": "Telescope",
+        "camera": "Camera",
+        "tent": "Tent",
+        "users": "Group",
+        "graduation": "Course",
+        "moon": "Moon"
+      },
+      "statuses": {
+        "draft": "Draft",
+        "published": "Published",
+        "archived": "Archived"
+      }
+    },
+    "orders": {
+      "title": "Orders",
+      "search": "Search",
+      "searchPlaceholder": "Code, name, email or phone",
+      "allStatuses": "All statuses",
+      "allTours": "All tours",
+      "tour": "Tour",
+      "from": "Departure from",
+      "to": "Departure to",
+      "sort": "Sort",
+      "apply": "Apply",
+      "reset": "Reset",
+      "exportCsv": "Export CSV",
+      "count": "{count, plural, =0 {No orders} one {# order} other {# orders}}",
+      "pageOf": "Page {page} of {pages}",
+      "prev": "Previous",
+      "next": "Next",
+      "code": "Code",
+      "contact": "Contact",
+      "departure": "Departure",
+      "guests": "Guests",
+      "unitPrice": "Price per guest",
+      "total": "Total",
+      "created": "Created",
+      "open": "Open",
+      "sorts": {
+        "created_desc": "Newest first",
+        "created_asc": "Oldest first",
+        "departure_asc": "Departure, soonest",
+        "departure_desc": "Departure, latest",
+        "total_desc": "Total, highest",
+        "total_asc": "Total, lowest"
+      },
+      "detail": "Order {code}",
+      "contactName": "Contact name",
+      "contactEmail": "Contact email",
+      "contactPhone": "Contact phone",
+      "note": "Note and activity log",
+      "activityNote": "Activity note",
+      "activityHint": "Why this change was made. Appended to the log with your email and the time.",
+      "totalHint": "Total is recomputed from the price per guest at booking time.",
+      "deleted": "Order deleted."
+    },
+    "queue": {
+      "title": "Change queue",
+      "explain": "Items here need a developer to ship in code — new dark-sky sites, 3D scenes, 360° imagery.",
+      "all": "All",
+      "kind": "Kind",
+      "createdBy": "Requested by",
+      "created": "Created",
+      "resolved": "Resolved",
+      "details": "Details",
+      "payload": "Payload",
+      "noPayload": "No payload.",
+      "resolutionNote": "Resolution note",
+      "resolutionHint": "Required when rejecting.",
+      "noteRequired": "Add a resolution note before rejecting.",
+      "markInProgress": "Mark in progress",
+      "markDone": "Mark done",
+      "markRejected": "Reject",
+      "statuses": {
+        "open": "Open",
+        "in_progress": "In progress",
+        "done": "Done",
+        "rejected": "Rejected"
+      },
+      "kinds": {
+        "location": "Dark-sky site",
+        "panorama": "360° imagery",
+        "3d": "3D scene",
+        "content": "Content",
+        "other": "Other"
+      }
+    }
+  }
+}

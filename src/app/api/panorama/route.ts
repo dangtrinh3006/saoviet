@@ -14,6 +14,9 @@ import {
 // Street-level imagery changes slowly; one upstream lookup per point per day.
 const REVALIDATE = 86400;
 const TIMEOUT_MS = 8000;
+// Dense areas (cities) make Mapillary slow; a smaller page with a longer wait still answers.
+const MAPILLARY_TIMEOUT_MS = 15000;
+const MAPILLARY_PAGE = 50;
 // Wikimedia asks API clients for a descriptive User-Agent with contact info.
 const USER_AGENT = `SaoViet/0.1 (${process.env.NEXT_PUBLIC_SITE_URL ?? "https://saoviet.vn"}; panorama lookup)`;
 // Expand only if the tight box is empty; wider radii are split into tiles because big bboxes are slow.
@@ -28,8 +31,8 @@ const Query = z.object({
 // Rounded to ~11 m so near-identical requests share one cache entry.
 const round = (v: number) => Math.round(v * 1e4) / 1e4;
 
-async function getJson(url: string, headers: Record<string, string>) {
-  const res = await fetch(url, { headers, next: { revalidate: REVALIDATE }, signal: AbortSignal.timeout(TIMEOUT_MS) });
+async function getJson(url: string, headers: Record<string, string>, timeoutMs = TIMEOUT_MS) {
+  const res = await fetch(url, { headers, next: { revalidate: REVALIDATE }, signal: AbortSignal.timeout(timeoutMs) });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return (await res.json()) as unknown;
 }
@@ -38,13 +41,16 @@ async function findMapillary(lat: number, lng: number, token: string): Promise<S
   // Header auth keeps the token out of URLs and access logs.
   const headers = { Authorization: `OAuth ${token}` };
   for (const r of MAPILLARY_RADII_KM) {
-    const tiles = await Promise.allSettled(tileBoxes(lat, lng, r, MAPILLARY_TILE_KM).map((b) => getJson(mapillaryQueryUrl(b), headers)));
+    const tiles = await Promise.allSettled(tileBoxes(lat, lng, r, MAPILLARY_TILE_KM).map((b) => getJson(mapillaryQueryUrl(b, MAPILLARY_PAGE), headers, MAPILLARY_TIMEOUT_MS)));
     const ok = tiles.flatMap((t) => (t.status === "fulfilled" ? [t.value] : []));
     if (!ok.length) throw (tiles[0] as PromiseRejectedResult).reason;
     const data = ok.flatMap((b) => ((b as { data?: unknown[] })?.data ?? []));
     const hit = nearestMapillary({ data }, lat, lng);
     // Box corners reach past the radius; keep the promise of "within r km".
     if (hit && hit.distanceKm <= r) return hit;
+    // A failed tile may hold the nearest image; "none nearby" would then be a false answer.
+    const failed = tiles.find((t) => t.status === "rejected");
+    if (failed) throw failed.reason;
   }
   return null;
 }

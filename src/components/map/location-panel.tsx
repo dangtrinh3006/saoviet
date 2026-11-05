@@ -4,8 +4,7 @@ import { ArrowUpRight, Orbit } from "@/components/ui/icons";
 import dynamic from "next/dynamic";
 import { useLocale, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
-import { tours } from "@/content/tours";
-import type { SkyLocation } from "@/content/types";
+import type { SkyLocation, Tour } from "@/content/types";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { formatCoord, pick } from "@/lib/l10n";
@@ -65,7 +64,7 @@ function SqmDial({ sqm }: { sqm: number }) {
 const time = (d: Date | null, locale: string) =>
   d ? d.toLocaleTimeString(locale === "en" ? "en-GB" : "vi-VN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Ho_Chi_Minh" }) : "—";
 
-export function LocationPanel({ location: l, sky, loading }: { location: SkyLocation; sky?: SkyConditions; loading: boolean }) {
+export function LocationPanel({ location: l, tours, sky, loading }: { location: SkyLocation; tours: Tour[]; sky?: SkyConditions; loading: boolean }) {
   const t = useTranslations("map");
   const tt = useTranslations("tours");
   const locale = useLocale();

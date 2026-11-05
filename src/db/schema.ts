@@ -3,12 +3,14 @@ import {
   boolean,
   index,
   integer,
+  jsonb,
   pgEnum,
   pgTable,
   text,
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
+import type { ImageRef, L10n } from "@/content/types";
 
 // Auth tables follow the Better Auth core schema + admin plugin columns (role, banned...).
 export const user = pgTable("user", {
@@ -189,4 +191,67 @@ export const mailOutbox = pgTable(
     createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (t) => [index("mail_outbox_created_idx").on(t.createdAt), index("mail_outbox_to_idx").on(t.to)],
+);
+
+// ---- Catalogue (admin-editable) -----------------------------------------------
+// Bilingual fields are stored as {vi, en} JSON so a row maps 1:1 onto the content types.
+
+export const publishStatus = pgEnum("publish_status", ["draft", "published", "archived"]);
+
+export const tour = pgTable(
+  "tour",
+  {
+    slug: text("slug").primaryKey(),
+    code: text("code").notNull(),
+    title: jsonb("title").$type<L10n>().notNull(),
+    tagline: jsonb("tagline").$type<L10n>().notNull(),
+    locationSlug: text("location_slug").notNull(),
+    nights: integer("nights").notNull(),
+    difficulty: text("difficulty").$type<"easy" | "moderate" | "hard">().notNull(),
+    priceVnd: integer("price_vnd").notNull(),
+    maxGuests: integer("max_guests").notNull(),
+    highlights: jsonb("highlights").$type<L10n[]>().notNull().default([]),
+    itinerary: jsonb("itinerary").$type<{ title: L10n; body: L10n }[]>().notNull().default([]),
+    includes: jsonb("includes").$type<L10n[]>().notNull().default([]),
+    image: jsonb("image").$type<ImageRef | null>(),
+    featured: boolean("featured").notNull().default(false),
+    status: publishStatus("status").notNull().default("draft"),
+    sortOrder: integer("sort_order").notNull().default(0),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (t) => [index("tour_status_idx").on(t.status)],
+);
+
+export const service = pgTable("service", {
+  slug: text("slug").primaryKey(),
+  icon: text("icon").$type<"telescope" | "camera" | "tent" | "users" | "graduation" | "moon">().notNull(),
+  title: jsonb("title").$type<L10n>().notNull(),
+  body: jsonb("body").$type<L10n>().notNull(),
+  fromVnd: integer("from_vnd").notNull(),
+  status: publishStatus("status").notNull().default("published"),
+  sortOrder: integer("sort_order").notNull().default(0),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// Work an admin cannot finish online (new 3D site, coordinates/SQM, 360° imagery) is
+// queued here for developers to ship in code, then marked done.
+export const changeStatus = pgEnum("change_status", ["open", "in_progress", "done", "rejected"]);
+
+export const changeRequest = pgTable(
+  "change_request",
+  {
+    id: text("id").primaryKey(),
+    kind: text("kind").$type<"location" | "panorama" | "3d" | "content" | "other">().notNull(),
+    title: text("title").notNull(),
+    details: text("details").notNull(),
+    payload: jsonb("payload").$type<Record<string, unknown>>(),
+    status: changeStatus("status").notNull().default("open"),
+    createdBy: text("created_by").references(() => user.id, { onDelete: "set null" }),
+    resolutionNote: text("resolution_note"),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    resolvedAt: timestamp("resolved_at"),
+  },
+  (t) => [index("change_request_status_idx").on(t.status)],
 );

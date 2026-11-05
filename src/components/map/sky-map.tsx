@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { locations } from "@/content/locations";
-import type { SkyLocation } from "@/content/types";
+import type { SkyLocation, Tour } from "@/content/types";
 import { cn } from "@/lib/cn";
 import { pick } from "@/lib/l10n";
 import { useSky } from "@/lib/use-sky";
@@ -44,7 +44,7 @@ function cssVar(name: string) {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
 
-export function SkyMap() {
+export function SkyMap({ tours }: { tours: Tour[] }) {
   const t = useTranslations("map");
   const locale = useLocale();
   const { resolvedTheme } = useTheme();
@@ -244,7 +244,7 @@ export function SkyMap() {
             <button type="button" onClick={() => setSelected(null)} aria-label="Close" className="absolute right-3 top-3 z-10 grid size-9 place-items-center rounded-full bg-bg/70 ring-1 ring-line">
               <X size={16} />
             </button>
-            <LocationPanel location={selected} sky={sky.data?.[selected.slug]} loading={sky.loading} />
+            <LocationPanel location={selected} tours={tours} sky={sky.data?.[selected.slug]} loading={sky.loading} />
           </motion.aside>
         )}
       </AnimatePresence>

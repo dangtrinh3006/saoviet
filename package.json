@@ -17,7 +17,8 @@
     "test:e2e": "playwright test",
     "test:all": "npm run lint && tsc --noEmit && vitest run && playwright test",
     "check": "npm run lint && tsc --noEmit && vitest run",
-    "deploy": "npm run check && vercel deploy --prod"
+    "deploy": "npm run check && vercel deploy --prod",
+    "db:seed:catalog": "tsx scripts/seed-catalog.ts"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.3.0",

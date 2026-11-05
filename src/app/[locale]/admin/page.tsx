@@ -4,7 +4,7 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { StatusChip } from "@/components/account/status-chip";
 import { HideToggle, OrderStatusSelect } from "@/components/admin/admin-controls";
 import { UserActions } from "@/components/admin/user-actions";
-import { tourBySlug } from "@/content/tours";
+import { tourLookup } from "@/server/catalog";
 import { Link } from "@/i18n/navigation";
 import { getFreshSession } from "@/lib/auth";
 import { cn } from "@/lib/cn";
@@ -22,6 +22,7 @@ export default async function AdminPage({ params, searchParams }: PageProps<"/[l
   setRequestLocale(locale);
   // Non-admins get a 404 rather than a 403, so the route does not advertise itself.
   const session = await getFreshSession();
+  const catalog = await tourLookup();
   if (session?.user.role !== "admin") notFound();
 
   const { tab: rawTab } = await searchParams;
@@ -99,7 +100,7 @@ export default async function AdminPage({ params, searchParams }: PageProps<"/[l
                   </thead>
                   <tbody className="divide-y divide-line">
                     {data.orders.map((o) => {
-                      const tour = tourBySlug(o.tourSlug);
+                      const tour = catalog.get(o.tourSlug);
                       return (
                         <tr key={o.id} className="align-top">
                           <td className="readout py-4 pr-4">{o.code}</td>
@@ -126,7 +127,7 @@ export default async function AdminPage({ params, searchParams }: PageProps<"/[l
               </div>
               <ul className="space-y-3 md:hidden">
                 {data.orders.map((o) => {
-                  const tour = tourBySlug(o.tourSlug);
+                  const tour = catalog.get(o.tourSlug);
                   return (
                     <li key={o.id} className="card space-y-3 p-4">
                       <div className="flex items-center justify-between gap-3">

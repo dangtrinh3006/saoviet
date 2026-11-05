@@ -5,7 +5,7 @@ import { CancelOrderButton } from "@/components/account/cancel-order-button";
 import { StatusChip } from "@/components/account/status-chip";
 import { Reveal } from "@/components/ui/reveal";
 import { SkyPlate } from "@/components/ui/sky-plate";
-import { tourBySlug } from "@/content/tours";
+import { tourLookup } from "@/server/catalog";
 import { Link, redirect } from "@/i18n/navigation";
 import { getSession } from "@/lib/auth";
 import { formatVnd, pick } from "@/lib/l10n";
@@ -25,6 +25,7 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/accou
   const t = await getTranslations("account");
   const tp = await getTranslations("pages");
   const tours = await getTranslations("tours");
+  const catalog = await tourLookup();
   const format = await getFormatter();
   const orders = await ordersForUser(session.user.id);
   const upcoming = orders.filter((o) => o.status === "pending" || o.status === "confirmed").length;
@@ -68,7 +69,7 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/accou
         ) : (
           <ul className="mt-8 space-y-4">
             {orders.map((o, i) => {
-              const tour = tourBySlug(o.tourSlug);
+              const tour = catalog.get(o.tourSlug);
               return (
                 <Reveal key={o.id} delay={Math.min(i, 6) * 0.04}>
                   <li className="card grid gap-5 overflow-hidden p-4 sm:grid-cols-[8rem_1fr] md:grid-cols-[10rem_1fr_auto] md:items-center md:p-5">

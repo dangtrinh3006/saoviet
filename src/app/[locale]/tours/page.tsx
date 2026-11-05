@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { TourBrowser } from "@/components/tours/tour-browser";
 import { Reveal } from "@/components/ui/reveal";
-import { tours } from "@/content/tours";
+import { listTours } from "@/server/catalog";
 import { ratingSummary } from "@/server/queries";
 
 export const dynamic = "force-dynamic";
@@ -17,7 +17,7 @@ export default async function ToursPage({ params }: PageProps<"/[locale]/tours">
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("tours");
-  const ratings = await ratingSummary().catch(() => ({}));
+  const [ratings, tours] = await Promise.all([ratingSummary().catch(() => ({})), listTours()]);
 
   return (
     <div className="mx-auto max-w-7xl px-5 pt-32 md:px-8 md:pt-44">

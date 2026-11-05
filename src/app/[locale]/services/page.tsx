@@ -2,7 +2,7 @@ import { ArrowRight, Camera, GraduationCap, Moon, Telescope, Tent, Users } from 
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Reveal } from "@/components/ui/reveal";
-import { services } from "@/content/services";
+import { listServices } from "@/server/catalog";
 import type { Service } from "@/content/types";
 import { Link } from "@/i18n/navigation";
 import { formatVnd, pick } from "@/lib/l10n";
@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/services
 }
 
 export default async function ServicesPage({ params }: PageProps<"/[locale]/services">) {
+  const services = await listServices();
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("pages");

@@ -8,7 +8,7 @@ import { ReviewForm } from "@/components/tours/review-form";
 import { Reveal } from "@/components/ui/reveal";
 import { SkyPlate } from "@/components/ui/sky-plate";
 import { locationBySlug } from "@/content/locations";
-import { tourBySlug, tours } from "@/content/tours";
+import { getTour } from "@/server/catalog";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { formatCoord, pick } from "@/lib/l10n";
@@ -16,13 +16,9 @@ import { reviewsForTour } from "@/server/queries";
 
 export const dynamic = "force-dynamic";
 
-export function generateStaticParams() {
-  return routing.locales.flatMap((locale) => tours.map((t) => ({ locale, slug: t.slug })));
-}
-
 export async function generateMetadata({ params }: PageProps<"/[locale]/tours/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
-  const tour = tourBySlug(slug);
+  const tour = await getTour(slug);
   if (!tour) return {};
   return { title: pick(tour.title, locale), description: pick(tour.tagline, locale) };
 }
@@ -30,7 +26,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/tours/[s
 export default async function TourPage({ params }: PageProps<"/[locale]/tours/[slug]">) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const tour = tourBySlug(slug);
+  const tour = await getTour(slug);
   if (!tour) notFound();
   const loc = locationBySlug(tour.locationSlug);
   const t = await getTranslations("tours");

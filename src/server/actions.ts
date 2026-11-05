@@ -3,7 +3,7 @@
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import type { z } from "zod";
-import { tourBySlug } from "@/content/tours";
+import { getTour, getTourAnyStatus } from "@/server/catalog";
 import { db, schema } from "@/db";
 import { getSession, requireAdmin, requireUser } from "@/lib/auth";
 import { formatVnd } from "@/lib/l10n";
@@ -28,7 +28,7 @@ export async function createOrder(input: z.input<typeof orderInput>): Promise<Ac
   const parsed = orderInput.safeParse(input);
   if (!parsed.success) return fail("INVALID_INPUT");
   const v = parsed.data;
-  const tour = tourBySlug(v.tourSlug);
+  const tour = await getTour(v.tourSlug);
   if (!tour) return fail("UNKNOWN_TOUR");
   if (v.guests > tour.maxGuests) return fail("TOO_MANY_GUESTS");
   const today = new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Ho_Chi_Minh" });
@@ -79,7 +79,7 @@ export async function upsertReview(input: z.input<typeof reviewInput>): Promise<
   const session = await requireUser().catch(() => null);
   if (!session) return fail("UNAUTHENTICATED");
   const parsed = reviewInput.safeParse(input);
-  if (!parsed.success || !tourBySlug(parsed.data.tourSlug)) return fail("INVALID_INPUT");
+  if (!parsed.success || !(await getTourAnyStatus(parsed.data.tourSlug))) return fail("INVALID_INPUT");
   const v = parsed.data;
   await db
     .insert(schema.review)

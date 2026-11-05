@@ -8,8 +8,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { SkyPlate } from "@/components/ui/sky-plate";
 import { locations } from "@/content/locations";
 import { posts } from "@/content/posts";
-import { services } from "@/content/services";
-import { tours } from "@/content/tours";
+import { listServices, listTours } from "@/server/catalog";
 import { Link } from "@/i18n/navigation";
 import { formatVnd, pick } from "@/lib/l10n";
 
@@ -18,6 +17,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   setRequestLocale(locale);
   const t = await getTranslations("home");
   const tb = await getTranslations("blog");
+  const [tours, services] = await Promise.all([listTours(), listServices()]);
   const featured = tours.filter((x) => x.featured).slice(0, 3);
   const darkest = [...locations].sort((a, b) => b.sqm - a.sqm).slice(0, 6);
 

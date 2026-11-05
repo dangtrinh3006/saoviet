@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { SkyMap } from "@/components/map/sky-map";
+import { listTours } from "@/server/catalog";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/map">): Promise<Metadata> {
   const { locale } = await params;
@@ -14,7 +15,7 @@ export default async function MapPage({ params }: PageProps<"/[locale]/map">) {
   setRequestLocale(locale);
   return (
     <Suspense>
-      <SkyMap />
+      <SkyMap tours={await listTours()} />
     </Suspense>
   );
 }

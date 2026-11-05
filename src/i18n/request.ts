@@ -4,7 +4,7 @@ import { routing } from "./routing";
 
 // Feature teams own their own message files (messages/extra/<feature>.<locale>.json),
 // merged as top-level namespaces so parallel work never edits the same JSON.
-const FEATURES = ["auth", "timeline", "legal"] as const;
+const FEATURES = ["auth", "timeline", "legal", "admincatalog", "adminops", "pano"] as const;
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;

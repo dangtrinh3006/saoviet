@@ -6,11 +6,7 @@ import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signIn, signUp } from "@/lib/auth-client";
-
-// Only same-site relative paths are honoured, so ?next= cannot become an open redirect.
-function safeNext(next: string | null) {
-  return next && next.startsWith("/") && !next.startsWith("//") ? next : "/account";
-}
+import { safeNext } from "@/lib/safe-next";
 
 export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
   const t = useTranslations("auth");

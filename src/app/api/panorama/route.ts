@@ -1,12 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 import {
-  bboxAround,
   commonsPanoramas,
   commonsGeosearchUrl,
   commonsPano360SearchUrl,
   mapillaryQueryUrl,
   nearestMapillary,
+  tileBoxes,
   type PanoramaApiResponse,
   type StreetPano,
 } from "@/lib/panorama-sources";
@@ -16,8 +16,9 @@ const REVALIDATE = 86400;
 const TIMEOUT_MS = 8000;
 // Wikimedia asks API clients for a descriptive User-Agent with contact info.
 const USER_AGENT = `SaoViet/0.1 (${process.env.NEXT_PUBLIC_SITE_URL ?? "https://saoviet.vn"}; panorama lookup)`;
-// Expand only if the tight box is empty: big Mapillary bboxes are slow and may be rejected.
-const MAPILLARY_RADII_KM = [2, 5];
+// Expand only if the tight box is empty; wider radii are split into tiles because big bboxes are slow.
+const MAPILLARY_RADII_KM = [2, 5, 10, 15];
+const MAPILLARY_TILE_KM = 5;
 
 const Query = z.object({
   lat: z.coerce.number().min(-90).max(90),
@@ -34,11 +35,16 @@ async function getJson(url: string, headers: Record<string, string>) {
 }
 
 async function findMapillary(lat: number, lng: number, token: string): Promise<StreetPano | null> {
+  // Header auth keeps the token out of URLs and access logs.
+  const headers = { Authorization: `OAuth ${token}` };
   for (const r of MAPILLARY_RADII_KM) {
-    // Header auth keeps the token out of URLs and access logs.
-    const body = await getJson(mapillaryQueryUrl(bboxAround(lat, lng, r)), { Authorization: `OAuth ${token}` });
-    const hit = nearestMapillary(body, lat, lng);
-    if (hit) return hit;
+    const tiles = await Promise.allSettled(tileBoxes(lat, lng, r, MAPILLARY_TILE_KM).map((b) => getJson(mapillaryQueryUrl(b), headers)));
+    const ok = tiles.flatMap((t) => (t.status === "fulfilled" ? [t.value] : []));
+    if (!ok.length) throw (tiles[0] as PromiseRejectedResult).reason;
+    const data = ok.flatMap((b) => ((b as { data?: unknown[] })?.data ?? []));
+    const hit = nearestMapillary({ data }, lat, lng);
+    // Box corners reach past the radius; keep the promise of "within r km".
+    if (hit && hit.distanceKm <= r) return hit;
   }
   return null;
 }

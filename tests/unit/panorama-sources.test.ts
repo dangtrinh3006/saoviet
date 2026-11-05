@@ -10,6 +10,7 @@ import {
   nearestMapillary,
   pickNearest,
   streetViewEmbedUrl,
+  tileBoxes,
 } from "@/lib/panorama-sources";
 
 const TA_XUA = { lat: 21.33, lng: 104.48 };
@@ -190,5 +191,24 @@ describe("streetViewEmbedUrl", () => {
     const url = new URL(streetViewEmbedUrl("TEST_KEY", 21.33, 104.48, { pano: "PANO_ID" }));
     expect(url.searchParams.get("pano")).toBe("PANO_ID");
     expect(url.searchParams.has("location")).toBe(false);
+  });
+});
+
+describe("tileBoxes", () => {
+  it("returns the single box when the radius fits one tile", () => {
+    expect(tileBoxes(TA_XUA.lat, TA_XUA.lng, 5, 5)).toEqual([bboxAround(TA_XUA.lat, TA_XUA.lng, 5)]);
+  });
+
+  it("covers a wider radius with tiles no bigger than the tile size", () => {
+    const tiles = tileBoxes(TA_XUA.lat, TA_XUA.lng, 15, 5);
+    expect(tiles).toHaveLength(9);
+    const outer = bboxAround(TA_XUA.lat, TA_XUA.lng, 15);
+    const one = bboxAround(TA_XUA.lat, TA_XUA.lng, 5);
+    for (const [a, b, c, d] of tiles) {
+      expect(c - a).toBeCloseTo(one[2] - one[0], 5);
+      expect(d - b).toBeCloseTo(one[3] - one[1], 5);
+    }
+    expect(Math.min(...tiles.map((t) => t[0]))).toBeCloseTo(outer[0], 5);
+    expect(Math.max(...tiles.map((t) => t[3]))).toBeCloseTo(outer[3], 5);
   });
 });

@@ -48,6 +48,20 @@ export function bboxAround(lat: number, lng: number, radiusKm: number): BBox {
   return [r(Math.max(-180, lng - dLng)), r(Math.max(-90, lat - dLat)), r(Math.min(180, lng + dLng)), r(Math.min(90, lat + dLat))];
 }
 
+/** Splits the box of `radiusKm` into an n×n grid of tiles of `tileKm` radius (Mapillary is slow on big boxes). */
+export function tileBoxes(lat: number, lng: number, radiusKm: number, tileKm: number): BBox[] {
+  const n = Math.ceil(radiusKm / tileKm);
+  if (n <= 1) return [bboxAround(lat, lng, radiusKm)];
+  const [minLng, minLat, maxLng, maxLat] = bboxAround(lat, lng, n * tileKm);
+  const w = (maxLng - minLng) / n;
+  const h = (maxLat - minLat) / n;
+  const r = (v: number) => Math.round(v * 1e6) / 1e6;
+  const out: BBox[] = [];
+  for (let i = 0; i < n; i++)
+    for (let j = 0; j < n; j++) out.push([r(minLng + i * w), r(minLat + j * h), r(minLng + (i + 1) * w), r(minLat + (j + 1) * h)]);
+  return out;
+}
+
 export function pickNearest<T extends { lat: number; lng: number }>(items: T[], lat: number, lng: number) {
   let best: (T & { distanceKm: number }) | null = null;
   for (const it of items) {

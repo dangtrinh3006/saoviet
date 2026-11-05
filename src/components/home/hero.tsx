@@ -8,6 +8,7 @@ import { useMemo } from "react";
 import { locations } from "@/content/locations";
 import { Link } from "@/i18n/navigation";
 import { moonInfo } from "@/lib/sky";
+import { HeroVideo } from "./hero-video";
 import { useMounted } from "@/lib/use-client";
 
 // WebGL never renders on the server; the poster gradient below is the LCP instead.
@@ -32,7 +33,8 @@ export function Hero() {
         className="absolute inset-0 -z-20"
         style={{ background: "radial-gradient(120% 80% at 70% 20%, color-mix(in oklab, var(--aurora) 14%, transparent), transparent 60%), radial-gradient(90% 60% at 10% 90%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%)" }}
       />
-      <Starfield className="absolute inset-0 -z-10" />
+      <HeroVideo />
+      <Starfield className="absolute inset-0 -z-10 opacity-70" />
       <div className="chart-grid absolute inset-0 -z-10 opacity-60" />
 
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 md:px-8 lg:grid-cols-[1.15fr_0.85fr]">

@@ -46,3 +46,4 @@ public/vendor/
 test-results/
 playwright-report/
 .seed-credentials.*.local
+.idea/

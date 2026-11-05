@@ -60,3 +60,20 @@ export const tourPhotoFallback: Record<string, ImageRef> = {
   "bidoup-nui-ba": placePhotos["lang-biang"],
   "phong-nha-ke-bang": space.milkyWay,
 };
+
+export interface HeroVideo {
+  src: string;
+  poster: string;
+  credit: string;
+  license: string;
+  sourceUrl: string;
+}
+
+// Re-encoded to 720p/25fps, muted, ≤10 s (scripts in docs). ESO requires a visible credit.
+export const heroVideos: HeroVideo[] = [
+  { src: "/video/paranal.mp4", poster: "/video/paranal.jpg", credit: "ESO/B.Tafreshi", license: "CC BY 4.0", sourceUrl: "https://www.eso.org/public/videos/uhd_bt_paranal_03/" },
+  { src: "/video/lasilla.mp4", poster: "/video/lasilla.jpg", credit: "ESO/B. Tafreshi (twanight.org)", license: "CC BY 4.0", sourceUrl: "https://www.eso.org/public/videos/bt_lasilla_crux/" },
+  { src: "/video/star-trails.mp4", poster: "/video/star-trails.jpg", credit: "ESO/B.Tafreshi", license: "CC BY 4.0", sourceUrl: "https://www.eso.org/public/videos/bt_lasilla_diff/" },
+  { src: "/video/hills.mp4", poster: "/video/hills.jpg", credit: "Emre Ayata / Pexels", license: "Pexels License", sourceUrl: "https://www.pexels.com/video/stunning-timelapse-of-milky-way-over-hills-32063954/" },
+  { src: "/video/vlt-domes.mp4", poster: "/video/vlt-domes.jpg", credit: "ESO/José Francisco Salgado (josefrancisco.org)", license: "CC BY 4.0", sourceUrl: "https://www.eso.org/public/videos/vltandatrotationtimelapse/" },
+];

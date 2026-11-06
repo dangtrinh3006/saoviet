@@ -13,6 +13,7 @@ export default function proxy(req: NextRequest) {
 }
 
 export const config = {
-  // Skip API, Next internals and files with an extension (images, fonts, models).
-  matcher: "/((?!api|_next|_vercel|.*\..*).*)",
+  // Skip API, Next internals and files with an extension. Keep "\\." double-escaped:
+  // a single "\." in a JS string is just "." and the matcher then skips every non-root path.
+  matcher: "/((?!api|_next|_vercel|.*\\..*).*)",
 };

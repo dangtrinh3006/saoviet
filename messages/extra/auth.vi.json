@@ -99,6 +99,14 @@
       "google": "Tiếp tục với Google",
       "or": "hoặc dùng email",
       "failed": "Đăng nhập Google không thành công. Hãy thử lại hoặc dùng email và mật khẩu."
+    },
+    "field": {
+      "show": "Hiện mật khẩu",
+      "hide": "Ẩn mật khẩu",
+      "capsLock": "⇪ Caps Lock đang bật",
+      "confirm": "Nhập lại mật khẩu",
+      "tooShort": "Mật khẩu cần ít nhất 8 ký tự.",
+      "mismatch": "Hai mật khẩu không khớp."
     }
   }
 }

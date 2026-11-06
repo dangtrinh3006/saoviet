@@ -99,6 +99,14 @@
       "google": "Continue with Google",
       "or": "or use email",
       "failed": "Google sign-in didn't complete. Try again, or use email and password."
+    },
+    "field": {
+      "show": "Show password",
+      "hide": "Hide password",
+      "capsLock": "⇪ Caps Lock is on",
+      "confirm": "Confirm password",
+      "tooShort": "Password must be at least 8 characters.",
+      "mismatch": "The two passwords don't match."
     }
   }
 }

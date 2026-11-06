@@ -6,13 +6,16 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signIn, signUp } from "@/lib/auth-client";
+import { newPasswordError } from "@/lib/password-check";
 import { safeNext } from "@/lib/safe-next";
+import { PasswordInput } from "@/components/ui/password-input";
 
 export function AuthForm({ mode, google = false }: { mode: "sign-in" | "sign-up"; google?: boolean }) {
   const t = useTranslations("auth");
   const tx = useTranslations("authx.forgot");
   const tp = useTranslations("pages");
   const ts = useTranslations("authx.social");
+  const tf = useTranslations("authx.field");
   const locale = useLocale();
   const router = useRouter();
   const params = useSearchParams();
@@ -30,6 +33,10 @@ export function AuthForm({ mode, google = false }: { mode: "sign-in" | "sign-up"
         const email = String(form.get("email") ?? "").trim();
         const password = String(form.get("password") ?? "");
         const name = String(form.get("name") ?? "").trim();
+        if (mode === "sign-up") {
+          const invalid = newPasswordError(password, String(form.get("confirmPassword") ?? ""));
+          if (invalid) return setError(tf(invalid));
+        }
         setError(null);
         start(async () => {
           const res =
@@ -81,16 +88,15 @@ export function AuthForm({ mode, google = false }: { mode: "sign-in" | "sign-up"
       </label>
       <label className="block space-y-2">
         <span className="eyebrow">{t("password")}</span>
-        <input
-          name="password"
-          type="password"
-          className="field"
-          autoComplete={mode === "sign-in" ? "current-password" : "new-password"}
-          minLength={8}
-          required
-        />
+        <PasswordInput name="password" autoComplete={mode === "sign-in" ? "current-password" : "new-password"} minLength={8} required />
         {mode === "sign-up" && <span className="block text-xs text-ink-faint">{tp("passwordHint")}</span>}
       </label>
+      {mode === "sign-up" && (
+        <label className="block space-y-2">
+          <span className="eyebrow">{tf("confirm")}</span>
+          <PasswordInput name="confirmPassword" autoComplete="new-password" minLength={8} required />
+        </label>
+      )}
       {mode === "sign-in" && (
         <p className="-mt-2 text-right text-sm">
           <Link href="/forgot-password" className="text-ink-muted underline-offset-4 hover:text-accent hover:underline">

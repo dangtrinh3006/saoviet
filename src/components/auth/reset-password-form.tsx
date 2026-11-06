@@ -4,9 +4,9 @@ import { ArrowRight } from "@/components/ui/icons";
 import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import { Link } from "@/i18n/navigation";
+import { PasswordInput } from "@/components/ui/password-input";
 import { authClient } from "@/lib/auth-client";
-
-const MIN_LENGTH = 8;
+import { MIN_PASSWORD_LENGTH as MIN_LENGTH, newPasswordError } from "@/lib/password-check";
 
 export function ResetPasswordForm({ token }: { token: string | null }) {
   const t = useTranslations("authx.reset");
@@ -50,8 +50,8 @@ export function ResetPasswordForm({ token }: { token: string | null }) {
         const form = new FormData(e.currentTarget);
         const newPassword = String(form.get("newPassword") ?? "");
         const confirm = String(form.get("confirmPassword") ?? "");
-        if (newPassword.length < MIN_LENGTH) return setError(t("tooShort"));
-        if (newPassword !== confirm) return setError(t("mismatch"));
+        const invalid = newPasswordError(newPassword, confirm);
+        if (invalid) return setError(t(invalid));
         setError(null);
         start(async () => {
           const res = await authClient.resetPassword({ newPassword, token });
@@ -67,11 +67,11 @@ export function ResetPasswordForm({ token }: { token: string | null }) {
     >
       <label className="block space-y-2">
         <span className="eyebrow">{t("newPassword")}</span>
-        <input name="newPassword" type="password" className="field" autoComplete="new-password" minLength={MIN_LENGTH} required />
+        <PasswordInput name="newPassword" autoComplete="new-password" minLength={MIN_LENGTH} required />
       </label>
       <label className="block space-y-2">
         <span className="eyebrow">{t("confirmPassword")}</span>
-        <input name="confirmPassword" type="password" className="field" autoComplete="new-password" minLength={MIN_LENGTH} required />
+        <PasswordInput name="confirmPassword" autoComplete="new-password" minLength={MIN_LENGTH} required />
         <span className="block text-xs text-ink-faint">{tp("passwordHint")}</span>
       </label>
       {error && (

@@ -3,8 +3,10 @@
 import { useTranslations } from "next-intl";
 import { useState, useTransition, type FormEvent, type ReactNode } from "react";
 import { useRouter } from "@/i18n/navigation";
+import { PasswordInput } from "@/components/ui/password-input";
 import { signOut } from "@/lib/auth-client";
 import { cn } from "@/lib/cn";
+import { newPasswordError } from "@/lib/password-check";
 import { changeMyPassword, deleteMyAccount, setMyPassword, updateMyName, type AccountResult } from "@/server/account-actions";
 
 type Notice = { ok: boolean; text: string } | null;
@@ -30,6 +32,7 @@ function Status({ notice }: { notice: Notice }) {
 /** Each form keeps its input after a failed submit; only a success clears the password fields. */
 export function AccountSettings({ name, email, hasPassword }: { name: string; email: string; hasPassword: boolean }) {
   const t = useTranslations("accountx");
+  const tf = useTranslations("authx.field");
   const router = useRouter();
   const [busy, start] = useTransition();
   const [notices, setNotices] = useState<Record<string, Notice>>({});
@@ -82,7 +85,10 @@ export function AccountSettings({ name, email, hasPassword }: { name: string; em
           <form
             className="space-y-4"
             onSubmit={submit("password", async (f, el) => {
-              const res = await changeMyPassword(String(f.get("current") ?? ""), String(f.get("next") ?? ""));
+              const next = String(f.get("next") ?? "");
+              const invalid = newPasswordError(next, String(f.get("confirmNext") ?? ""));
+              if (invalid) return void note("password", { ok: false, text: tf(invalid) });
+              const res = await changeMyPassword(String(f.get("current") ?? ""), next);
               if (!res.ok) return void fail("password", res);
               el.reset();
               return t("password.changed");
@@ -90,12 +96,16 @@ export function AccountSettings({ name, email, hasPassword }: { name: string; em
           >
             <label className="block space-y-2">
               <span className="eyebrow">{t("password.current")}</span>
-              <input name="current" type="password" className="field" autoComplete="current-password" required />
+              <PasswordInput name="current" autoComplete="current-password" required />
             </label>
             <label className="block space-y-2">
               <span className="eyebrow">{t("password.new")}</span>
-              <input name="next" type="password" className="field" autoComplete="new-password" minLength={8} required />
+              <PasswordInput name="next" autoComplete="new-password" minLength={8} required />
               <span className="block text-xs text-ink-faint">{t("password.hint")}</span>
+            </label>
+            <label className="block space-y-2">
+              <span className="eyebrow">{tf("confirm")}</span>
+              <PasswordInput name="confirmNext" autoComplete="new-password" minLength={8} required />
             </label>
             <button type="submit" disabled={busy} className="btn btn-primary disabled:opacity-60">
               {t("password.change")}
@@ -106,7 +116,10 @@ export function AccountSettings({ name, email, hasPassword }: { name: string; em
           <form
             className="space-y-4"
             onSubmit={submit("password", async (f, el) => {
-              const res = await setMyPassword(String(f.get("next") ?? ""));
+              const next = String(f.get("next") ?? "");
+              const invalid = newPasswordError(next, String(f.get("confirmNext") ?? ""));
+              if (invalid) return void note("password", { ok: false, text: tf(invalid) });
+              const res = await setMyPassword(next);
               if (!res.ok) return void fail("password", res);
               el.reset();
               router.refresh();
@@ -116,8 +129,12 @@ export function AccountSettings({ name, email, hasPassword }: { name: string; em
             <p className="text-sm text-ink-muted">{t("password.googleOnly")}</p>
             <label className="block space-y-2">
               <span className="eyebrow">{t("password.new")}</span>
-              <input name="next" type="password" className="field" autoComplete="new-password" minLength={8} required />
+              <PasswordInput name="next" autoComplete="new-password" minLength={8} required />
               <span className="block text-xs text-ink-faint">{t("password.hint")}</span>
+            </label>
+            <label className="block space-y-2">
+              <span className="eyebrow">{tf("confirm")}</span>
+              <PasswordInput name="confirmNext" autoComplete="new-password" minLength={8} required />
             </label>
             <button type="submit" disabled={busy} className="btn btn-primary disabled:opacity-60">
               {t("password.set")}

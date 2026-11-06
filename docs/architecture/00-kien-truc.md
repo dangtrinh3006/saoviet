@@ -224,7 +224,7 @@ npm run deploy     # check rồi vercel deploy --prod
 |---|---|---|
 | Trang công khai, danh mục, bản đồ, AQI/mây | ✅ | |
 | Đặt tour (lưu đơn) | ✅ | |
-| Email (xác nhận đơn, đổi trạng thái, đặt lại mật khẩu) | 🟡 | Chưa có `RESEND_API_KEY`: thư chỉ nằm trong outbox |
+| Email (xác nhận đơn, đổi trạng thái, đặt lại mật khẩu) | 🟡 | Resend đã gắn (06/11/2026, gửi thật OK). Chưa có tên miền riêng nên chỉ gửi được tới email chủ tài khoản Resend; thư cho khách khác bị từ chối và nằm ở outbox trạng thái `failed` |
 | Đăng nhập Google | 🟡 | Local đã chạy; production có nút nhưng chưa ai đăng nhập thử |
 | Quản trị danh mục, đơn, hàng chờ | ✅ | |
 | Quản trị người dùng, nhật ký thao tác | 🟡 | Local đã chạy; production đã migrate + deploy, chưa bấm thử |

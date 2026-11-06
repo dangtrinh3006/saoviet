@@ -12,6 +12,11 @@ import { sendMail } from "./mailer";
 const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
 const baseURL = process.env.BETTER_AUTH_URL ?? (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3100");
 
+const googleClientId = process.env.GOOGLE_CLIENT_ID;
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
+/** Sign-in pages show the Google button only when the OAuth client is configured. */
+export const googleAuthEnabled = Boolean(googleClientId && googleClientSecret);
+
 export const auth = betterAuth({
   baseURL,
   trustedOrigins: [baseURL, ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : [])],
@@ -27,6 +32,9 @@ export const auth = betterAuth({
       await sendMail({ to: user.email, kind: "reset-password", ...resetPasswordMail({ name: user.name, url }) });
     },
   },
+  socialProviders: googleAuthEnabled ? { google: { clientId: googleClientId!, clientSecret: googleClientSecret!, prompt: "select_account" } } : {},
+  // Google verifies email ownership, so a Google sign-in joins the existing account with that email.
+  account: { accountLinking: { enabled: true, trustedProviders: ["google"] } },
   session: { cookieCache: { enabled: true, maxAge: 5 * 60 } },
   // nextCookies must stay last: it lets server actions set the session cookie.
   plugins: [admin(), nextCookies()],

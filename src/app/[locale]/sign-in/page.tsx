@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { AuthForm } from "@/components/auth/auth-form";
 import { AuthShell } from "@/components/auth/auth-shell";
+import { googleAuthEnabled } from "@/lib/auth";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/sign-in">): Promise<Metadata> {
   const { locale } = await params;
@@ -17,7 +18,7 @@ export default async function SignInPage({ params }: PageProps<"/[locale]/sign-i
   return (
     <AuthShell title={t("signIn")}>
       <Suspense>
-        <AuthForm mode="sign-in" />
+        <AuthForm mode="sign-in" google={googleAuthEnabled} />
       </Suspense>
     </AuthShell>
   );

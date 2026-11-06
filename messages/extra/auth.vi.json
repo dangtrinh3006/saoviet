@@ -45,8 +45,15 @@
       "time": "Thời gian",
       "details": "Xem nội dung",
       "error": "Lỗi gửi",
-      "kinds": { "reset-password": "Đặt lại mật khẩu", "booking-confirmation": "Xác nhận đặt tour" },
-      "statuses": { "queued": "Chờ gửi", "sent": "Đã gửi", "failed": "Lỗi" }
+      "kinds": {
+        "reset-password": "Đặt lại mật khẩu",
+        "booking-confirmation": "Xác nhận đặt tour"
+      },
+      "statuses": {
+        "queued": "Chờ gửi",
+        "sent": "Đã gửi",
+        "failed": "Lỗi"
+      }
     },
     "mail": {
       "brand": "Sao Việt",
@@ -69,6 +76,11 @@
         "total": "Tổng tiền",
         "footer": "Giữ lại mã đơn để tra cứu trong mục Tài khoản."
       }
+    },
+    "social": {
+      "google": "Tiếp tục với Google",
+      "or": "hoặc dùng email",
+      "failed": "Đăng nhập Google không thành công. Hãy thử lại hoặc dùng email và mật khẩu."
     }
   }
 }

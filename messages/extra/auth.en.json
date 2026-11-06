@@ -45,8 +45,15 @@
       "time": "Time",
       "details": "View content",
       "error": "Delivery error",
-      "kinds": { "reset-password": "Password reset", "booking-confirmation": "Booking confirmation" },
-      "statuses": { "queued": "Queued", "sent": "Sent", "failed": "Failed" }
+      "kinds": {
+        "reset-password": "Password reset",
+        "booking-confirmation": "Booking confirmation"
+      },
+      "statuses": {
+        "queued": "Queued",
+        "sent": "Sent",
+        "failed": "Failed"
+      }
     },
     "mail": {
       "brand": "Sao Việt",
@@ -69,6 +76,11 @@
         "total": "Total",
         "footer": "Keep this code to look the booking up under Account."
       }
+    },
+    "social": {
+      "google": "Continue with Google",
+      "or": "or use email",
+      "failed": "Google sign-in didn't complete. Try again, or use email and password."
     }
   }
 }

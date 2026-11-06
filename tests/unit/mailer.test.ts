@@ -12,7 +12,7 @@ vi.mock("@/db", () => ({
   },
 }));
 
-import { bookingConfirmationMail, escapeHtml, resetPasswordMail } from "@/lib/mail-templates";
+import { bookingConfirmationMail, escapeHtml, orderStatusMail, resetPasswordMail } from "@/lib/mail-templates";
 import { sendMail } from "@/lib/mailer";
 
 const mail = { to: "user@saoviet.test", subject: "Subject", html: "<p>Hi</p>", text: "Hi", kind: "reset-password" as const };
@@ -101,5 +101,24 @@ describe("authx messages", () => {
     const vi = (await import("../../messages/extra/auth.vi.json")).default;
     const en = (await import("../../messages/extra/auth.en.json")).default;
     expect(keys(vi).sort()).toEqual(keys(en).sort());
+  });
+});
+
+describe("orderStatusMail", () => {
+  const data = { name: "<Lan>", code: "SV-ABC123", tourTitle: { vi: "Tà Xùa", en: "Ta Xua" }, departureDate: "2026-12-12" };
+
+  it("names the code and new status in both languages", () => {
+    const m = orderStatusMail({ ...data, status: "confirmed" });
+    expect(m.subject).toContain("SV-ABC123");
+    expect(m.subject).toContain("đã xác nhận");
+    expect(m.subject).toContain("confirmed");
+    expect(m.text).toContain("Ta Xua");
+    expect(m.text).toContain("2026-12-12");
+  });
+
+  it("escapes user-supplied names in the HTML", () => {
+    const m = orderStatusMail({ ...data, status: "cancelled" });
+    expect(m.html).not.toContain("<Lan>");
+    expect(m.html).toContain("&lt;Lan&gt;");
   });
 });

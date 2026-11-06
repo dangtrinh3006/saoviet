@@ -47,7 +47,8 @@
       "error": "Delivery error",
       "kinds": {
         "reset-password": "Password reset",
-        "booking-confirmation": "Booking confirmation"
+        "booking-confirmation": "Booking confirmation",
+        "order-status": "Booking status"
       },
       "statuses": {
         "queued": "Queued",
@@ -75,6 +76,23 @@
         "guests": "Guests",
         "total": "Total",
         "footer": "Keep this code to look the booking up under Account."
+      },
+      "orderStatus": {
+        "subject": "Booking {code}: {status}",
+        "greeting": "Hi {name},",
+        "statuses": {
+          "confirmed": "confirmed",
+          "completed": "completed",
+          "cancelled": "cancelled"
+        },
+        "body": {
+          "confirmed": "Sao Việt has confirmed your trip. See you under the stars!",
+          "completed": "Thanks for travelling with Sao Việt. If you have a minute, please leave a review of the trip.",
+          "cancelled": "Your booking has been cancelled. If this is a mistake, reply to this email or contact us."
+        },
+        "tour": "Tour",
+        "date": "Departure",
+        "footer": "See the booking details in your Account page."
       }
     },
     "social": {

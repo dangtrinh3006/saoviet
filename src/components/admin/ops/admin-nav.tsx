@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Layers, MessageSquare, Mountain, Orbit, Shield, Telescope, Users, Warning } from "@/components/ui/icons";
+import { History, Layers, MessageSquare, Mountain, Orbit, Shield, Telescope, Users, Warning } from "@/components/ui/icons";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
@@ -14,9 +14,10 @@ const ITEMS: Item[] = [
   { key: "services", href: "/admin/services", icon: Telescope, match: (p) => p.startsWith("/admin/services") },
   { key: "orders", href: "/admin/orders", icon: Layers, match: (p) => p.startsWith("/admin/orders") },
   { key: "queue", href: "/admin/queue", icon: Warning, match: (p) => p.startsWith("/admin/queue") },
-  { key: "users", href: "/admin?tab=users", icon: Users, match: (p, tab) => p === "/admin" && tab === "users" },
+  { key: "users", href: "/admin?tab=users", icon: Users, match: (p, tab) => (p === "/admin" && tab === "users") || p.startsWith("/admin/users") },
   { key: "outbox", href: "/admin?tab=outbox", icon: MessageSquare, match: (p, tab) => p === "/admin" && tab === "outbox" },
   { key: "moderation", href: "/admin?tab=moderation", icon: Shield, match: (p, tab) => p === "/admin" && tab === "moderation" },
+  { key: "audit", href: "/admin/audit", icon: History, match: (p) => p.startsWith("/admin/audit") },
 ];
 
 /** Vertical rail from lg up; a horizontally scrolling strip below, so the page itself never scrolls sideways. */

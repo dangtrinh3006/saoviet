@@ -47,7 +47,8 @@
       "error": "Lỗi gửi",
       "kinds": {
         "reset-password": "Đặt lại mật khẩu",
-        "booking-confirmation": "Xác nhận đặt tour"
+        "booking-confirmation": "Xác nhận đặt tour",
+        "order-status": "Trạng thái đơn"
       },
       "statuses": {
         "queued": "Chờ gửi",
@@ -75,6 +76,23 @@
         "guests": "Số khách",
         "total": "Tổng tiền",
         "footer": "Giữ lại mã đơn để tra cứu trong mục Tài khoản."
+      },
+      "orderStatus": {
+        "subject": "Đơn {code}: {status}",
+        "greeting": "Chào {name},",
+        "statuses": {
+          "confirmed": "đã xác nhận",
+          "completed": "đã hoàn thành",
+          "cancelled": "đã huỷ"
+        },
+        "body": {
+          "confirmed": "Sao Việt đã xác nhận chuyến đi của bạn. Hẹn gặp bạn dưới bầu trời sao!",
+          "completed": "Cảm ơn bạn đã đi cùng Sao Việt. Nếu có thời gian, hãy để lại đánh giá cho chuyến đi nhé.",
+          "cancelled": "Đơn của bạn đã được huỷ. Nếu đây là nhầm lẫn, hãy trả lời email này hoặc liên hệ chúng tôi."
+        },
+        "tour": "Tour",
+        "date": "Ngày khởi hành",
+        "footer": "Xem chi tiết đơn trong trang Tài khoản của bạn."
       }
     },
     "social": {

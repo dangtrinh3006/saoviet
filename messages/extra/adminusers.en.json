@@ -1,0 +1,76 @@
+{
+  "adminusers": {
+    "viewProfile": "Details",
+    "back": "All users",
+    "joined": "Joined {date}",
+    "verified": "Email verified",
+    "notVerified": "Email not verified",
+    "signInMethods": "Sign-in methods",
+    "provider": {
+      "credential": "Email and password",
+      "google": "Google"
+    },
+    "sessions": "{count, plural, =0 {No active sessions} one {# active session} other {# active sessions}}",
+    "lastActive": "last active {date}",
+    "orders": "Orders",
+    "reviews": "Reviews",
+    "comments": "Comments",
+    "none": "None yet.",
+    "hidden": "hidden",
+    "history": "Admin activity on this account",
+    "role": {
+      "title": "Role",
+      "user": "User",
+      "admin": "Administrator",
+      "makeAdmin": "Grant admin",
+      "makeUser": "Revoke admin"
+    },
+    "ban": {
+      "title": "Account lock",
+      "active": "Account active",
+      "banned": "Locked",
+      "reasonLabel": "Reason (optional)",
+      "reason": "Reason: {reason}",
+      "ban": "Lock account",
+      "unban": "Unlock",
+      "note": "Locking signs the user out on every device."
+    },
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "done": "Updated.",
+    "errors": {
+      "unchanged": "Nothing changed.",
+      "self": "You can't revoke your own admin role or lock yourself.",
+      "lastAdmin": "This is the last administrator — grant admin to someone else first.",
+      "adminTarget": "Revoke admin before locking this account.",
+      "INVALID_INPUT": "Invalid input.",
+      "NOT_FOUND": "User not found.",
+      "FAILED": "That didn't work, please try again."
+    },
+    "audit": {
+      "title": "Audit log",
+      "subtitle": "Every admin change to users and orders, newest first.",
+      "empty": "No actions yet.",
+      "by": "by {email}",
+      "actions": {
+        "user": {
+          "role": "Role changed",
+          "ban": "Account locked",
+          "unban": "Account unlocked",
+          "reset_email": "Password reset email sent",
+          "temp_password": "Temporary password set",
+          "revoke_sessions": "Signed out everywhere"
+        },
+        "order": {
+          "status": "Order status changed",
+          "update": "Order edited",
+          "delete": "Order deleted"
+        }
+      },
+      "targets": {
+        "user": "User",
+        "order": "Order"
+      }
+    }
+  }
+}

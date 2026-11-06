@@ -255,3 +255,20 @@ export const changeRequest = pgTable(
   },
   (t) => [index("change_request_status_idx").on(t.status)],
 );
+
+// ---- Admin audit trail ---------------------------------------------------------
+// Actor email is copied so the trail stays readable after the account is deleted.
+export const auditLog = pgTable(
+  "audit_log",
+  {
+    id: text("id").primaryKey(),
+    actorId: text("actor_id"),
+    actorEmail: text("actor_email").notNull(),
+    action: text("action").notNull(),
+    targetType: text("target_type").notNull(),
+    targetId: text("target_id").notNull(),
+    detail: jsonb("detail").$type<Record<string, unknown>>(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (t) => [index("audit_log_created_idx").on(t.createdAt), index("audit_log_target_idx").on(t.targetType, t.targetId)],
+);

@@ -10,7 +10,8 @@
       "users": "Users",
       "outbox": "Outbox",
       "moderation": "Moderation",
-      "openCount": "{count} open"
+      "openCount": "{count} open",
+      "audit": "Audit log"
     },
     "common": {
       "status": "Status",

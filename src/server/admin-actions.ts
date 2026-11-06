@@ -6,6 +6,7 @@ import { z } from "zod";
 import { db, schema } from "@/db";
 import { routing } from "@/i18n/routing";
 import { auth, requireAdmin } from "@/lib/auth";
+import { audit } from "./audit";
 
 export type AdminResult<T = undefined> = { ok: true; data?: T } | { ok: false; error: string };
 
@@ -38,7 +39,7 @@ function tempPassword(length = 14) {
 
 /** Sends the user the same reset email as the public form; the email comes from the DB, not the client. */
 export async function adminSendResetEmail(userId: string, locale: string): Promise<AdminResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   const user = await findUser(userId);
   const loc = localeInput.safeParse(locale);
   if (!user || !loc.success) return { ok: false, error: "INVALID_INPUT" };
@@ -47,12 +48,13 @@ export async function adminSendResetEmail(userId: string, locale: string): Promi
   } catch {
     return { ok: false, error: "RESET_EMAIL_FAILED" };
   }
+  await audit(admin, "user.reset_email", { type: "user", id: user.id });
   return { ok: true };
 }
 
 /** Returns the generated password once to the admin UI; it is never logged or stored in clear. */
 export async function adminSetTempPassword(userId: string): Promise<AdminResult<{ password: string }>> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   const user = await findUser(userId);
   if (!user) return { ok: false, error: "INVALID_INPUT" };
   const password = tempPassword();
@@ -61,11 +63,12 @@ export async function adminSetTempPassword(userId: string): Promise<AdminResult<
   } catch {
     return { ok: false, error: "SET_PASSWORD_FAILED" };
   }
+  await audit(admin, "user.temp_password", { type: "user", id: user.id });
   return { ok: true, data: { password } };
 }
 
 export async function adminRevokeSessions(userId: string): Promise<AdminResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   const user = await findUser(userId);
   if (!user) return { ok: false, error: "INVALID_INPUT" };
   try {
@@ -73,6 +76,7 @@ export async function adminRevokeSessions(userId: string): Promise<AdminResult> 
   } catch {
     return { ok: false, error: "REVOKE_FAILED" };
   }
+  await audit(admin, "user.revoke_sessions", { type: "user", id: user.id });
   return { ok: true };
 }
 

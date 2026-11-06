@@ -90,3 +90,41 @@ export function bookingConfirmationMail(d: BookingMailData): RenderedMail {
   }).join("\n\n----\n\n");
   return { subject, html: layout(subject, sections), text };
 }
+
+export type NotifiedStatus = "confirmed" | "completed" | "cancelled";
+
+export type OrderStatusMailData = {
+  name: string;
+  code: string;
+  status: NotifiedStatus;
+  tourTitle: Record<"vi" | "en", string>;
+  departureDate: string;
+};
+
+export function orderStatusMail(d: OrderStatusMailData): RenderedMail {
+  const head = (l: (typeof LOCALES)[number]) => fill(COPY[l].orderStatus.subject, { code: d.code, status: COPY[l].orderStatus.statuses[d.status] });
+  const subject = `${head("vi")} · ${head("en")}`;
+  const rows = (l: (typeof LOCALES)[number]) => {
+    const c = COPY[l].orderStatus;
+    return [
+      [c.tour, d.tourTitle[l]],
+      [c.date, d.departureDate],
+    ] as const;
+  };
+  const sections = LOCALES.map((l) => {
+    const c = COPY[l].orderStatus;
+    const table = rows(l)
+      .map(([k, v]) => `<tr><td style="padding:8px 0;color:${C.muted};font-size:13px;border-bottom:1px solid ${C.line}">${escapeHtml(k)}</td><td align="right" style="padding:8px 0;border-bottom:1px solid ${C.line}">${escapeHtml(v)}</td></tr>`)
+      .join("");
+    return `<h1 style="margin:0 0 16px;font-size:22px;color:${C.ink}">${escapeHtml(head(l))}</h1>
+<p style="margin:0 0 12px">${escapeHtml(fill(c.greeting, { name: d.name }))}</p>
+<p style="margin:0 0 16px;color:${C.muted}">${escapeHtml(c.body[d.status])}</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px">${table}</table>
+<p style="margin:16px 0 0;font-size:13px;color:${C.muted}">${escapeHtml(c.footer)}</p>`;
+  });
+  const text = LOCALES.map((l) => {
+    const c = COPY[l].orderStatus;
+    return [head(l), "", fill(c.greeting, { name: d.name }), "", c.body[d.status], "", ...rows(l).map(([k, v]) => `${k}: ${v}`), "", c.footer].join("\n");
+  }).join("\n\n----\n\n");
+  return { subject, html: layout(subject, sections), text };
+}

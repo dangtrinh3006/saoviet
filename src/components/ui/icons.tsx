@@ -13,6 +13,7 @@ import {
   Camera as PhCamera,
   ChatCircle,
   Check as PhCheck,
+  ClockCounterClockwise,
   CheckCircle,
   Cloud as PhCloud,
   Copy as PhCopy,
@@ -69,6 +70,7 @@ export const Camera = wrap(PhCamera, "duotone");
 export const Check = wrap(PhCheck, "bold");
 export const CheckCircle2 = wrap(CheckCircle, "duotone");
 export const Cloud = wrap(PhCloud);
+export const History = wrap(ClockCounterClockwise);
 export const Copy = wrap(PhCopy);
 export const Eye = wrap(PhEye);
 export const EyeOff = wrap(EyeSlash);

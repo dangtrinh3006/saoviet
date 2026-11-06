@@ -200,7 +200,9 @@ async function UsersTab({ roleLabel, banLabel }: { roleLabel: string; banLabel: 
           <li key={u.id} className="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-1 py-4 sm:grid-cols-[auto_1fr_auto_auto]">
             <span className="grid size-9 place-items-center rounded-full bg-surface text-sm ring-1 ring-line">{u.name.slice(0, 1).toUpperCase()}</span>
             <div className="min-w-0">
-              <p className="truncate font-medium">{u.name}</p>
+              <Link href={`/admin/users/${u.id}`} className="block truncate font-medium hover:text-accent">
+                {u.name}
+              </Link>
               <p className="truncate text-xs text-ink-faint">{u.email}</p>
             </div>
             <span className={cn("readout col-start-2 text-xs uppercase sm:col-start-auto", u.role === "admin" ? "text-accent" : "text-ink-muted")}>

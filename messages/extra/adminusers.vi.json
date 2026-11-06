@@ -1,0 +1,76 @@
+{
+  "adminusers": {
+    "viewProfile": "Chi tiết",
+    "back": "Tất cả người dùng",
+    "joined": "Tham gia {date}",
+    "verified": "Email đã xác minh",
+    "notVerified": "Email chưa xác minh",
+    "signInMethods": "Cách đăng nhập",
+    "provider": {
+      "credential": "Email và mật khẩu",
+      "google": "Google"
+    },
+    "sessions": "{count, plural, =0 {Không có phiên đăng nhập} other {# phiên đang hoạt động}}",
+    "lastActive": "hoạt động gần nhất {date}",
+    "orders": "Đơn hàng",
+    "reviews": "Đánh giá",
+    "comments": "Bình luận",
+    "none": "Chưa có.",
+    "hidden": "đã ẩn",
+    "history": "Lịch sử thao tác của quản trị viên",
+    "role": {
+      "title": "Vai trò",
+      "user": "Người dùng",
+      "admin": "Quản trị viên",
+      "makeAdmin": "Cấp quyền quản trị",
+      "makeUser": "Thu hồi quyền quản trị"
+    },
+    "ban": {
+      "title": "Khoá tài khoản",
+      "active": "Tài khoản đang hoạt động",
+      "banned": "Đang bị khoá",
+      "reasonLabel": "Lý do khoá (không bắt buộc)",
+      "reason": "Lý do: {reason}",
+      "ban": "Khoá tài khoản",
+      "unban": "Mở khoá",
+      "note": "Khoá sẽ đăng xuất người dùng khỏi mọi thiết bị."
+    },
+    "confirm": "Xác nhận",
+    "cancel": "Huỷ",
+    "done": "Đã cập nhật.",
+    "errors": {
+      "unchanged": "Không có gì thay đổi.",
+      "self": "Bạn không thể tự thu hồi quyền hoặc tự khoá chính mình.",
+      "lastAdmin": "Đây là quản trị viên cuối cùng — hãy cấp quyền cho người khác trước.",
+      "adminTarget": "Hãy thu hồi quyền quản trị trước khi khoá tài khoản này.",
+      "INVALID_INPUT": "Dữ liệu không hợp lệ.",
+      "NOT_FOUND": "Không tìm thấy người dùng.",
+      "FAILED": "Không thực hiện được, hãy thử lại."
+    },
+    "audit": {
+      "title": "Nhật ký thao tác",
+      "subtitle": "Mọi thay đổi của quản trị viên lên người dùng và đơn hàng, mới nhất trước.",
+      "empty": "Chưa có thao tác nào.",
+      "by": "bởi {email}",
+      "actions": {
+        "user": {
+          "role": "Đổi vai trò",
+          "ban": "Khoá tài khoản",
+          "unban": "Mở khoá tài khoản",
+          "reset_email": "Gửi email đặt lại mật khẩu",
+          "temp_password": "Đặt mật khẩu tạm",
+          "revoke_sessions": "Đăng xuất mọi thiết bị"
+        },
+        "order": {
+          "status": "Đổi trạng thái đơn",
+          "update": "Sửa đơn",
+          "delete": "Xoá đơn"
+        }
+      },
+      "targets": {
+        "user": "Người dùng",
+        "order": "Đơn"
+      }
+    }
+  }
+}

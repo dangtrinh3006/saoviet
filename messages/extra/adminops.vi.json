@@ -10,7 +10,8 @@
       "users": "Người dùng",
       "outbox": "Hộp thư đi",
       "moderation": "Kiểm duyệt",
-      "openCount": "{count} đang mở"
+      "openCount": "{count} đang mở",
+      "audit": "Nhật ký thao tác"
     },
     "common": {
       "status": "Trạng thái",

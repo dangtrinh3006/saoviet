@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { services as staticServices } from "@/content/services";
 import { db, schema } from "@/db";
 import { requireAdmin } from "@/lib/auth";
+import { orderStatusMail, type NotifiedStatus } from "@/lib/mail-templates";
+import { sendMail } from "@/lib/mailer";
 import {
   changeResolveInput,
   ORDER_STATUSES,
@@ -15,6 +17,8 @@ import {
   type OrderStatus,
   type ServiceInput,
 } from "@/lib/ops-schema";
+import { audit } from "./audit";
+import { getTourAnyStatus } from "./catalog";
 
 export type OpsResult<T = undefined> = { ok: true; data?: T } | { ok: false; error: string };
 
@@ -100,22 +104,44 @@ export async function moveService(slug: string, direction: "up" | "down"): Promi
 
 // ---- Orders ----------------------------------------------------------------
 
+const isNotifiedStatus = (s: OrderStatus): s is NotifiedStatus => s === "confirmed" || s === "completed" || s === "cancelled";
+
+/** Mail failures are logged in the outbox; they never undo the status change. */
+async function notifyStatus(o: typeof schema.order.$inferSelect, status: NotifiedStatus) {
+  try {
+    const tour = await getTourAnyStatus(o.tourSlug);
+    await sendMail({
+      to: o.contactEmail,
+      kind: "order-status",
+      ...orderStatusMail({
+        name: o.contactName,
+        code: o.code,
+        status,
+        tourTitle: tour ? { vi: tour.title.vi, en: tour.title.en } : { vi: o.tourSlug, en: o.tourSlug },
+        departureDate: o.departureDate,
+      }),
+    });
+  } catch (e) {
+    console.error("order status mail failed", o.code, e instanceof Error ? e.message : e);
+  }
+}
+
 export async function setOrderStatusOps(orderId: string, status: OrderStatus): Promise<OpsResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   const id = idSchema(orderId);
   if (!id || !ORDER_STATUSES.includes(status)) return fail("INVALID_INPUT");
-  const updated = await db
-    .update(schema.order)
-    .set({ status, updatedAt: new Date() })
-    .where(eq(schema.order.id, id))
-    .returning({ id: schema.order.id });
-  if (updated.length === 0) return fail("NOT_FOUND");
+  const [before] = await db.select().from(schema.order).where(eq(schema.order.id, id)).limit(1);
+  if (!before) return fail("NOT_FOUND");
+  await db.update(schema.order).set({ status, updatedAt: new Date() }).where(eq(schema.order.id, id));
+  await audit(admin, "order.status", { type: "order", id }, { from: before.status, to: status });
+  // Only a real change notifies the customer, so a repeated click never sends twice.
+  if (before.status !== status && isNotifiedStatus(status)) await notifyStatus(before, status);
   revalidatePath("/[locale]/admin", "layout");
   revalidatePath("/[locale]/account", "page");
   return { ok: true };
 }
 
-/** Admin edits are appended to the order note as a signed log line (no audit table yet). */
+/** Admin edits are appended to the order note as a signed log line and recorded in the audit log. */
 export async function updateOrder(input: OrderEditInput): Promise<OpsResult<{ totalVnd: number; note: string }>> {
   const session = await requireAdmin();
   const parsed = orderEditInput.safeParse(input);
@@ -156,17 +182,19 @@ export async function updateOrder(input: OrderEditInput): Promise<OpsResult<{ to
       updatedAt: new Date(),
     })
     .where(eq(schema.order.id, v.id));
+  if (changes.length > 0) await audit(session, "order.update", { type: "order", id: v.id }, { changes });
   revalidatePath("/[locale]/admin", "layout");
   revalidatePath("/[locale]/account", "page");
   return { ok: true, data: { totalVnd, note } };
 }
 
 export async function deleteOrder(orderId: string): Promise<OpsResult> {
-  await requireAdmin();
+  const admin = await requireAdmin();
   const id = idSchema(orderId);
   if (!id) return fail("INVALID_INPUT");
   const deleted = await db.delete(schema.order).where(eq(schema.order.id, id)).returning({ id: schema.order.id });
   if (deleted.length === 0) return fail("NOT_FOUND");
+  await audit(admin, "order.delete", { type: "order", id });
   revalidatePath("/[locale]/admin", "layout");
   revalidatePath("/[locale]/account", "page");
   return { ok: true };

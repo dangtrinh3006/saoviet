@@ -2,7 +2,7 @@ import "server-only";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/db";
 
-export type MailKind = "reset-password" | "booking-confirmation";
+export type MailKind = "reset-password" | "booking-confirmation" | "order-status";
 export type MailInput = { to: string; subject: string; html: string; text: string; kind: MailKind };
 export type MailResult = { id: string; status: "queued" | "sent" | "failed" };
 

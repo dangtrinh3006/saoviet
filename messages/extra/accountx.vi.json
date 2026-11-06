@@ -1,0 +1,48 @@
+{
+  "accountx": {
+    "settingsLink": "Cài đặt tài khoản",
+    "title": "Cài đặt tài khoản",
+    "back": "Về trang tài khoản",
+    "saving": "Đang lưu…",
+    "saved": "Đã lưu.",
+    "profile": {
+      "title": "Hồ sơ",
+      "name": "Họ và tên",
+      "save": "Lưu tên",
+      "email": "Email đăng nhập",
+      "emailNote": "Email không đổi được ở đây."
+    },
+    "password": {
+      "title": "Mật khẩu",
+      "current": "Mật khẩu hiện tại",
+      "new": "Mật khẩu mới",
+      "hint": "Tối thiểu 8 ký tự.",
+      "change": "Đổi mật khẩu",
+      "changed": "Đã đổi mật khẩu. Các thiết bị khác đã được đăng xuất.",
+      "googleOnly": "Bạn đang đăng nhập bằng Google. Đặt mật khẩu để đăng nhập được cả bằng email.",
+      "set": "Đặt mật khẩu",
+      "setDone": "Đã đặt mật khẩu. Giờ bạn có thể đăng nhập bằng email hoặc Google."
+    },
+    "data": {
+      "title": "Dữ liệu của bạn",
+      "exportBody": "Tải về một tệp JSON chứa hồ sơ, cách đăng nhập, phiên đăng nhập, đơn đặt tour, đánh giá, bình luận và chủ đề diễn đàn của bạn. Tệp không chứa mật khẩu hay mã phiên.",
+      "export": "Tải dữ liệu của tôi"
+    },
+    "delete": {
+      "title": "Xoá tài khoản",
+      "body": "Tài khoản, phiên đăng nhập và cách đăng nhập sẽ bị xoá ngay. Đơn đặt tour được giữ 24 tháng kể từ ngày khởi hành để giải quyết khiếu nại, đúng như Chính sách bảo mật, nhưng không còn gắn với tài khoản.",
+      "keep": "Giữ lại đánh giá, bình luận và chủ đề diễn đàn dưới dạng ẩn danh",
+      "remove": "Xoá luôn đánh giá, bình luận và chủ đề diễn đàn",
+      "confirmLabel": "Gõ email của bạn để xác nhận",
+      "submit": "Xoá vĩnh viễn tài khoản",
+      "irreversible": "Không thể hoàn tác."
+    },
+    "errors": {
+      "INVALID_INPUT": "Dữ liệu chưa hợp lệ.",
+      "WRONG_PASSWORD": "Mật khẩu hiện tại không đúng.",
+      "HAS_PASSWORD": "Tài khoản đã có mật khẩu.",
+      "EMAIL_MISMATCH": "Email nhập chưa khớp với email tài khoản.",
+      "FAILED": "Không thực hiện được, hãy thử lại."
+    }
+  }
+}

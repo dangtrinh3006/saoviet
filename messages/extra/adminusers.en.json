@@ -59,7 +59,8 @@
           "unban": "Account unlocked",
           "reset_email": "Password reset email sent",
           "temp_password": "Temporary password set",
-          "revoke_sessions": "Signed out everywhere"
+          "revoke_sessions": "Signed out everywhere",
+          "self_delete": "User deleted own account"
         },
         "order": {
           "status": "Order status changed",

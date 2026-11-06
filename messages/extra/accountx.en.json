@@ -1,0 +1,48 @@
+{
+  "accountx": {
+    "settingsLink": "Account settings",
+    "title": "Account settings",
+    "back": "Back to account",
+    "saving": "Saving…",
+    "saved": "Saved.",
+    "profile": {
+      "title": "Profile",
+      "name": "Full name",
+      "save": "Save name",
+      "email": "Sign-in email",
+      "emailNote": "Email can't be changed here."
+    },
+    "password": {
+      "title": "Password",
+      "current": "Current password",
+      "new": "New password",
+      "hint": "At least 8 characters.",
+      "change": "Change password",
+      "changed": "Password changed. Other devices have been signed out.",
+      "googleOnly": "You sign in with Google. Set a password to also sign in with email.",
+      "set": "Set password",
+      "setDone": "Password set. You can now sign in with email or Google."
+    },
+    "data": {
+      "title": "Your data",
+      "exportBody": "Download a JSON file with your profile, sign-in methods, sessions, bookings, reviews, comments and forum threads. It contains no passwords or session tokens.",
+      "export": "Download my data"
+    },
+    "delete": {
+      "title": "Delete account",
+      "body": "Your account, sessions and sign-in methods are deleted immediately. Bookings are kept for 24 months after departure to handle complaints, as stated in the Privacy Policy, but are no longer linked to an account.",
+      "keep": "Keep my reviews, comments and forum threads, anonymised",
+      "remove": "Delete my reviews, comments and forum threads too",
+      "confirmLabel": "Type your email to confirm",
+      "submit": "Permanently delete account",
+      "irreversible": "This can't be undone."
+    },
+    "errors": {
+      "INVALID_INPUT": "Please check your input.",
+      "WRONG_PASSWORD": "Current password is incorrect.",
+      "HAS_PASSWORD": "This account already has a password.",
+      "EMAIL_MISMATCH": "That email doesn't match your account.",
+      "FAILED": "That didn't work, please try again."
+    }
+  }
+}

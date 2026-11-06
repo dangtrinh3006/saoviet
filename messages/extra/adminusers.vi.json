@@ -59,7 +59,8 @@
           "unban": "Mở khoá tài khoản",
           "reset_email": "Gửi email đặt lại mật khẩu",
           "temp_password": "Đặt mật khẩu tạm",
-          "revoke_sessions": "Đăng xuất mọi thiết bị"
+          "revoke_sessions": "Đăng xuất mọi thiết bị",
+          "self_delete": "Người dùng tự xoá tài khoản"
         },
         "order": {
           "status": "Đổi trạng thái đơn",

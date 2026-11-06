@@ -24,6 +24,7 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/accou
   if (!session) return redirect({ href: "/sign-in?next=/account", locale });
   const t = await getTranslations("account");
   const tp = await getTranslations("pages");
+  const tx = await getTranslations("accountx");
   const tours = await getTranslations("tours");
   const catalog = await tourLookup();
   const format = await getFormatter();
@@ -41,6 +42,9 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/accou
             <p className="eyebrow">{t("title")}</p>
             <h1 className="display mt-2 truncate text-4xl md:text-5xl">{session.user.name}</h1>
             <p className="mt-1 truncate text-sm text-ink-muted">{session.user.email}</p>
+            <Link href="/account/settings" className="mt-2 inline-block text-sm text-accent underline-offset-4 hover:underline">
+              {tx("settingsLink")}
+            </Link>
           </div>
         </div>
         <dl className="readout grid grid-cols-2 gap-8 text-sm">
